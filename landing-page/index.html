@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SmartLend - P2P Lending Platform">
+    <title>SmartLend - P2P Lending</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <!-- header -->
+    <header class="bg-blue-600 text-white py-4 px-6 flex justify-between items-center">
+        <div class="logo">
+            <h1 class="text-2xl font-bold">SmartLend</h1>
+            <p class="text-sm">Your Trusted P2P Lending Platform</p>
+        </div>
+        <nav>
+            <ul class="flex space-x-6">
+                <li><a href="#home" class="hover:underline">Home</a></li>
+                <li><a href="#features" class="hover:underline">Features</a></li>
+                <li><a href="#contact" class="hover:underline">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero bg-white py-12 text-center">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold">Welcome to SmartLend</h2>
+            <p class="text-lg text-gray-600 mt-2">Your trusted Peer-to-Peer lending platform</p>
+            <img src="assets/images/pic.jpg" alt="SmartLend P2P Lending Platform" class="hero-image mx-auto mt-4 rounded-lg shadow-lg w-1/2">
+            <a href="#contact" class="mt-6 inline-block bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-700">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-12 bg-gray-200 text-center">
+        <h2 class="text-3xl font-bold">Our Key Features</h2>
+        <div class="feature-list grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 px-6">
+            <div class="feature bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold">Easy Lending</h3>
+                <p class="text-gray-600">Quick and simple process for lenders</p>
+            </div>
+            <div class="feature bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold">Secure Transactions</h3>
+                <p class="text-gray-600">Your funds are safe with top-notch security</p>
+            </div>
+            <div class="feature bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold">Fast Approval</h3>
+                <p class="text-gray-600">Get approved within minutes for fast loans</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-12 bg-white text-center">
+        <h2 class="text-3xl font-bold">Contact Us</h2>
+        <form id="contact-form" class="mt-6 w-full max-w-md mx-auto bg-gray-100 p-6 rounded-lg shadow-md">
+            <input type="email" placeholder="Your Email" required class="w-full p-3 mb-4 border border-gray-300 rounded-lg">
+            <textarea placeholder="Your Message" required class="w-full p-3 mb-4 border border-gray-300 rounded-lg"></textarea>
+            <button type="submit" class="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-700">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white py-4 text-center">
+        <p>&copy; 2025 SmartLend. All rights reserved.</p>
+    </footer>
+
+    <!-- GSAP and ScrollMagic Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
+    
+    <!-- Your custom script file -->
+    <script src="scripts/script.js"></script>
+</body>
+</html>
