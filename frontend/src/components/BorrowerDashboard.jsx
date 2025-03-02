@@ -6,7 +6,9 @@ const BorrowerDashboard = () => {
   const [loanData, setLoanData] = useState([]);
   const [error, setError] = useState(false);
 
-  useEffect(() => {
+  // Simulated Loan Data Fetching
+  const fetchLoanData = () => {
+    setLoading(true);
     setTimeout(() => {
       try {
         setLoanData([
@@ -19,6 +21,10 @@ const BorrowerDashboard = () => {
       }
       setLoading(false);
     }, 1000);
+  };
+
+  useEffect(() => {
+    fetchLoanData();
   }, []);
 
   return (
@@ -29,13 +35,18 @@ const BorrowerDashboard = () => {
       transition={{ duration: 0.5 }}
     >
       <h2 className="text-3xl font-bold text-blue-600 mb-6">Borrower Dashboard</h2>
+
+      {/* Loader */}
       {loading ? (
         <div className="flex justify-center items-center h-20">
           <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-blue-500"></div>
         </div>
       ) : error ? (
         <div className="text-red-500 text-lg font-semibold">
-          Error loading data. <button className="text-blue-500 underline" onClick={() => window.location.reload()}>Retry</button>
+          Error loading data.{" "}
+          <button className="text-blue-500 underline" onClick={fetchLoanData}>
+            Retry
+          </button>
         </div>
       ) : (
         <div className="bg-white shadow-xl rounded-lg p-6 w-full max-w-3xl">
@@ -55,13 +66,21 @@ const BorrowerDashboard = () => {
                   <tr key={loan.id} className="border border-gray-300 hover:bg-gray-100">
                     <td className="border border-gray-300 p-3">{loan.id}</td>
                     <td className="border border-gray-300 p-3">${loan.amount}</td>
-                    <td className={`border border-gray-300 p-3 font-bold ${loan.status === "Approved" ? "text-green-500" : "text-yellow-500"}`}>{loan.status}</td>
+                    <td
+                      className={`border border-gray-300 p-3 font-bold ${
+                        loan.status === "Approved" ? "text-green-500" : "text-yellow-500"
+                      }`}
+                    >
+                      {loan.status}
+                    </td>
                     <td className="border border-gray-300 p-3">{loan.nextPayment || "N/A"}</td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="4" className="text-center p-4 text-gray-600">No loans found</td>
+                  <td colSpan="4" className="text-center p-4 text-gray-600">
+                    No loans found
+                  </td>
                 </tr>
               )}
             </tbody>
