@@ -5,43 +5,46 @@ import SignupPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import BorrowerDashboard from "./components/BorrowerDashboard";
 import LoanApplicationPage from "./pages/LoanApplication";
-import PublicNavbar from "./components/PublicNavbar"; // General navbar
-import BorrowerNavbar from "./components/BorrowerNavbar"; // Borrower-specific navbar
-import Footer from "./components/Footer"; // Footer for all pages
+import PublicNavbar from "./components/PublicNavbar";
+import BorrowerNavbar from "./components/BorrowerNavbar";
+import LoanStatusPage from "./pages/LoanApprovalStatus";
+import LoanAgreementPage from "./pages/LoanAgreement";
+import RepaymentTrackingPage from "./pages/RepaymentTracking";
+import Footer from "./components/Footer";
 
 const App = () => {
   const [user, setUser] = useState(null); // Authentication state
 
   return (
     <Router>
-      {/* Dynamic Navbar: Public for general users, Borrower for logged-in users */}
-      {user ? <BorrowerNavbar /> : <PublicNavbar />}
-      
-      <div className="content-wrapper"> {/* Wrapper for layout consistency */}
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/signuppage" element={<SignupPage />} />
-          <Route path="/loginpage" element={<LoginPage setUser={setUser} />} />
-          
-          {/* Borrower Dashboard (Protected Route - Authentication Bypassed for Now) */}
-          <Route path="/borrower-dashboard" element={<BorrowerDashboard />} />
+      <div className="flex flex-col min-h-screen"> {/* Ensures full height */}
+        
+        {/* Navbar at the top */}
+        {user ? <BorrowerNavbar /> : <PublicNavbar />}
+        
+        {/* Main Content Wrapper (pushes footer down) */}
+        <div className="flex-grow pt-16"> {/* Adjust pt-16 based on navbar height */}
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/signuppage" element={<SignupPage />} />
+            <Route path="/loginpage" element={<LoginPage setUser={setUser} />} />
+            
+            {/* Borrower Dashboard (Protected Route - Authentication Bypassed for Now) */}
+            <Route path="/borrower-dashboard" element={<BorrowerDashboard />} />
 
-          {/* Loan Application Page (Protected Route - Authentication Bypassed for Now) */}
-          <Route path="/loan-application" element={<LoanApplicationPage />} />
-          
-          {/* Uncomment this when authentication is ready */}
-          {/**
-          <Route path="/borrower-dashboard" 
-            element={user ? <BorrowerDashboard /> : <Navigate to="/loginpage" />} />
+            {/* Loan Application Page */}
+            <Route path="/loan-application" element={<LoanApplicationPage />} />
 
-          <Route path="/loan-application" 
-            element={user ? <LoanApplicationPage /> : <Navigate to="/loginpage" />} />
-          */}
-        </Routes>
+            {/* Loan-related pages */}
+            <Route path="/loan-approval-status" element={<LoanStatusPage />} />
+            <Route path="/loan-agreement" element={<LoanAgreementPage />} />
+            <Route path="/repayment-tracking" element={<RepaymentTrackingPage />} />
+          </Routes>
+        </div>
+
+        {/* Footer always at the bottom */}
+        <Footer />
       </div>
-      
-      {/* Footer across all pages */}
-      <Footer />
     </Router>
   );
 };
