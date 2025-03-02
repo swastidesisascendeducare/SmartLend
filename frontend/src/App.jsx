@@ -10,7 +10,13 @@ import BorrowerNavbar from "./components/BorrowerNavbar";
 import LoanStatusPage from "./pages/LoanApprovalStatus";
 import LoanAgreementPage from "./pages/LoanAgreement";
 import RepaymentTrackingPage from "./pages/RepaymentTracking";
+import LenderDashboard from "./pages/lender/LenderDashboard"
+import LoanMatchingFunding from "./pages/lender/LoanMatchingFunding"
+import CollaborativeLoanFunding from "./pages/lender/CollaborativeLoanFunding"
+import InvestmentPortfolio from "./pages/lender/InvestmentPortfolio"
+import LoanAgreementReview from "./pages/lender/LoanAgreementReview"
 import Footer from "./components/Footer";
+
 
 const App = () => {
   const [user, setUser] = useState(null); // Authentication state
@@ -39,6 +45,12 @@ const App = () => {
             <Route path="/loan-approval-status" element={<LoanStatusPage />} />
             <Route path="/loan-agreement" element={<LoanAgreementPage />} />
             <Route path="/repayment-tracking" element={<RepaymentTrackingPage />} />
+
+            <Route path="/lender-dashboard" element={<LenderDashboard />} />
+            <Route path="/loan-matching-funding" element={<LoanMatchingFunding />} />
+            <Route path="/collaborative-loan-funding" element={<CollaborativeLoanFunding />} />
+            <Route path="/investment-portfolio" element={<InvestmentPortfolio />} />
+            <Route path="/loan-agreement-review" element={<LoanAgreementReview />} />
           </Routes>
         </div>
 
