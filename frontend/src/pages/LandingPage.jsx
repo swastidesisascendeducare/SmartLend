@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../components/PublicNavbar";
 import Hero from "../components/Hero";
 import About from "../components/About";
-import HowItWorks from "../components/HowItWorks"; // Renamed for consistency
+import HowItWorks from "../components/How-It-Works"; // Renamed for consistency
 import Faq from "../components/Faq";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
@@ -33,10 +33,6 @@ const LandingPage = () => {
       <section id="contact" aria-label="Contact Us">
         <Contact />
       </section>
-
-      <footer>
-        <Footer />
-      </footer>
     </main>
   );
 };
