@@ -8,7 +8,9 @@ const Footer = () => {
         {/* Left - Brand & Copyright */}
         <div className="mb-6 md:mb-0">
           <h2 className="text-2xl font-bold text-white">SmartLend</h2>
-          <p className="text-sm mt-2">&copy; {new Date().getFullYear()} All rights reserved.</p>
+          <p className="text-sm mt-2">SmartLend &copy; {new Date().getFullYear()} All rights reserved.</p>
+          
+          <p className="text-sm mt-1">Authors: Swasti Mishra, Sharvani Pallempati, Trupti Khodwe, Vidhi Arora</p>
         </div>
 
         {/* Center - Navigation Links */}
@@ -48,7 +50,6 @@ const Footer = () => {
             ))}
           </div>
         </div>
-
       </div>
     </footer>
   );
