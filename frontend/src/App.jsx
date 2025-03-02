@@ -46,11 +46,11 @@ const App = () => {
             <Route path="/loan-agreement" element={<LoanAgreementPage />} />
             <Route path="/repayment-tracking" element={<RepaymentTrackingPage />} />
 
-            <Route path="/lender-dashboard" element={<LenderDashboard />} />
-            <Route path="/loan-matching-funding" element={<LoanMatchingFunding />} />
-            <Route path="/collaborative-loan-funding" element={<CollaborativeLoanFunding />} />
-            <Route path="/investment-portfolio" element={<InvestmentPortfolio />} />
-            <Route path="/loan-agreement-review" element={<LoanAgreementReview />} />
+            <Route path="/lender/lender-dashboard" element={<LenderDashboard />} />
+            <Route path="/lender/loan-matching-funding" element={<LoanMatchingFunding />} />
+            <Route path="/lender/collaborative-loan-funding" element={<CollaborativeLoanFunding />} />
+            <Route path="/lender/investment-portfolio" element={<InvestmentPortfolio />} />
+            <Route path="/lender/loan-agreement-review" element={<LoanAgreementReview />} />
           </Routes>
         </div>
 
