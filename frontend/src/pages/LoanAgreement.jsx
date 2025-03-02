@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const LoanAgreementPage = () => {
   const [agreed, setAgreed] = useState(false);
   const [signature, setSignature] = useState("");
+  const [isSigned, setIsSigned] = useState(false);
 
   const handleSignAgreement = () => {
     if (!agreed) {
@@ -13,15 +14,30 @@ const LoanAgreementPage = () => {
       alert("Please provide your signature before signing.");
       return;
     }
-    alert("Loan Agreement Signed Successfully!");
+    setIsSigned(true);
   };
 
   const handleDownload = () => {
-    alert("Loan Agreement PDF Downloaded! (Mock Functionality)");
+    const element = document.createElement("a");
+    const fileContent = `
+      Loan Agreement Details
+      ----------------------
+      Loan Amount: $10,000
+      Interest Rate: 5% per annum
+      Term: 24 months
+      Monthly Payment: $440
+      ----------------------
+      Agreement Signed By: ${signature}
+    `;
+    const file = new Blob([fileContent], { type: "text/plain" });
+    element.href = URL.createObjectURL(file);
+    element.download = "Loan_Agreement.txt";
+    document.body.appendChild(element);
+    element.click();
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-gray-50 min-h-screen">
+    <div className="max-w-2xl mx-auto p-8 bg-gray-100 min-h-screen shadow-lg rounded-lg">
       <h1 className="text-3xl font-bold mb-6 text-center text-blue-700">
         Loan Agreement
       </h1>
@@ -58,17 +74,17 @@ const LoanAgreementPage = () => {
       </div>
 
       {/* Checkbox for Agreement Confirmation */}
-      <div className="mt-4 flex items-center">
+      <label className="flex items-center mt-4 cursor-pointer">
         <input
           type="checkbox"
           checked={agreed}
           onChange={() => setAgreed(!agreed)}
           className="mr-2 h-5 w-5"
         />
-        <label className="text-gray-700 text-sm">
+        <span className="text-gray-700 text-sm">
           I agree to the terms and conditions of this loan agreement.
-        </label>
-      </div>
+        </span>
+      </label>
 
       {/* Signature Input */}
       <div className="mt-4">
@@ -83,6 +99,13 @@ const LoanAgreementPage = () => {
           placeholder="Enter your full name as a signature"
         />
       </div>
+
+      {/* Success Message */}
+      {isSigned && (
+        <p className="text-green-600 mt-4 font-semibold">
+          ✅ Loan Agreement Signed Successfully!
+        </p>
+      )}
 
       {/* Buttons */}
       <div className="mt-6 flex justify-between">
