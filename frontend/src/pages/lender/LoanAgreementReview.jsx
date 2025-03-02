@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
-import { Button } from "@/components/ui/button";
 
 const LoanAgreementReview = () => {
   const [isAccepted, setIsAccepted] = useState(false);
@@ -71,15 +70,15 @@ const LoanAgreementReview = () => {
         <p>By clicking "Accept Agreement," you acknowledge the loan terms and agree to legally abide by them.</p>
         
         <div className="mt-4 flex items-center">
-          <Button className="bg-green-500 text-white px-6 py-2 rounded-lg mr-4" onClick={handleAgreementAcceptance}>
+          <button className="bg-green-500 text-white px-6 py-2 rounded-lg mr-4" onClick={handleAgreementAcceptance}>
             ✅ Accept Agreement
-          </Button>
+          </button>
 
           <PDFDownloadLink document={<LoanAgreementPDF />} fileName="Loan_Agreement.pdf">
             {({ loading }) => (
-              <Button className="bg-blue-500 text-white px-6 py-2 rounded-lg">
+              <button className="bg-blue-500 text-white px-6 py-2 rounded-lg">
                 {loading ? "Preparing Document..." : "📄 Download Agreement"}
-              </Button>
+              </button>
             )}
           </PDFDownloadLink>
         </div>
