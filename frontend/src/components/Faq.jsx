@@ -35,6 +35,7 @@ const FAQ = () => {
   return (
     <section id="faq" className="bg-backgroundLight py-20">
       <div className="container mx-auto text-center px-6">
+        {/* Section Heading */}
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -60,10 +61,15 @@ const FAQ = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className={`p-5 border-2 rounded-lg cursor-pointer shadow-md ${
+              className={`p-5 border-2 rounded-lg cursor-pointer shadow-md transition-all duration-300 ${
                 openIndex === index ? "border-primary bg-white" : "border-gray-300 bg-white"
               }`}
               onClick={() => toggleFAQ(index)}
+              onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && toggleFAQ(index)}
+              role="button"
+              tabIndex={0}
+              aria-expanded={openIndex === index}
+              aria-controls={`faq-answer-${index}`}
             >
               <div className="flex justify-between items-center">
                 <h3 className="text-xl font-semibold text-textPrimary">{faq.question}</h3>
@@ -76,6 +82,7 @@ const FAQ = () => {
               <AnimatePresence>
                 {openIndex === index && (
                   <motion.p
+                    id={`faq-answer-${index}`}
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
