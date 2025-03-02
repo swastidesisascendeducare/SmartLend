@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { ArrowLeft as Home } from "lucide-react"; // Importing Home Icon
+import { ArrowLeft as Home, Eye, EyeOff } from "lucide-react"; // Importing Icons
 import BackgroundAnimation from "../components/Background-Animation";
-import logo from "../assets/SmartLendLogo6.png"
+import logo from "../assets/SmartLendLogo6.png";
 
 const SignUpPage = () => {
   const location = useLocation();
@@ -12,10 +12,34 @@ const SignUpPage = () => {
   const navigate = useNavigate();
 
   const [isLender, setIsLender] = useState(initialType);
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+    phoneNumber: "",
+    loanAmount: "",
+    lenderType: "individual",
+  });
 
   useEffect(() => {
     setIsLender(initialType);
   }, [initialType]);
+
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add form validation & API integration here
+    console.log("Submitted Form Data:", formData);
+    navigate("/dashboard");
+  };
 
   return (
     <div className="relative w-full h-screen flex items-center justify-center px-6">
@@ -24,7 +48,6 @@ const SignUpPage = () => {
 
       {/* SignUp Container */}
       <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md relative">
-        
         {/* Home Icon (Top Left) */}
         <button 
           onClick={() => navigate("/")} 
@@ -58,14 +81,90 @@ const SignUpPage = () => {
         </div>
 
         {/* Signup Form */}
-        <form className="space-y-4 text-textDark">
-          <input type="text" placeholder="Full Name" className="w-full px-4 py-3 border border-zinc-400 rounded-lg text-lg font-medium" />
-          <input type="email" placeholder="Email" className="w-full px-4 py-3 border border-zinc-400 rounded-lg text-lg font-medium" />
-          <input type="password" placeholder="Password" className="w-full px-4 py-3 border border-zinc-400 rounded-lg text-lg font-medium" />
-          <input type="tel" placeholder="Phone Number" className="w-full px-4 py-3 border border-zinc-400 rounded-lg text-lg font-medium" />
-          
+        <form onSubmit={handleSubmit} className="space-y-4 text-textDark">
+          <input 
+            type="text" 
+            name="fullName" 
+            placeholder="Full Name" 
+            value={formData.fullName} 
+            onChange={handleInputChange} 
+            className="w-full px-4 py-3 border border-zinc-400 rounded-lg text-lg font-medium" 
+            required
+          />
+
+          <input 
+            type="email" 
+            name="email" 
+            placeholder="Email" 
+            value={formData.email} 
+            onChange={handleInputChange} 
+            className="w-full px-4 py-3 border border-zinc-400 rounded-lg text-lg font-medium" 
+            required
+          />
+
+          <div className="relative">
+            <input 
+              type={showPassword ? "text" : "password"} 
+              name="password" 
+              placeholder="Password" 
+              value={formData.password} 
+              onChange={handleInputChange} 
+              className="w-full px-4 py-3 border border-zinc-400 rounded-lg text-lg font-medium pr-12"
+              required
+            />
+            <button 
+              type="button" 
+              onClick={togglePasswordVisibility} 
+              className="absolute right-4 top-3 text-gray-500"
+            >
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
+          </div>
+
+          <input 
+            type="tel" 
+            name="phoneNumber" 
+            placeholder="Phone Number" 
+            value={formData.phoneNumber} 
+            onChange={handleInputChange} 
+            className="w-full px-4 py-3 border border-zinc-400 rounded-lg text-lg font-medium" 
+            required
+          />
+
+          {/* Borrower Specific Field */}
+          {!isLender && (
+            <input 
+              type="number" 
+              name="loanAmount" 
+              placeholder="Desired Loan Amount ($)" 
+              value={formData.loanAmount} 
+              onChange={handleInputChange} 
+              className="w-full px-4 py-3 border border-zinc-400 rounded-lg text-lg font-medium" 
+              required
+            />
+          )}
+
+          {/* Lender Specific Field */}
+          {isLender && (
+            <div className="flex flex-col">
+              <label className="text-gray-600 font-medium text-sm mb-2">Lender Type</label>
+              <select 
+                name="lenderType" 
+                value={formData.lenderType} 
+                onChange={handleInputChange} 
+                className="w-full px-4 py-3 border border-zinc-400 rounded-lg text-lg font-medium"
+              >
+                <option value="individual">Individual</option>
+                <option value="institution">Institutional</option>
+              </select>
+            </div>
+          )}
+
           {/* Submit Button */}
-          <button className="w-full bg-primary text-white py-3 rounded-lg hover:bg-hoverEffect transition text-lg font-semibold">
+          <button 
+            type="submit" 
+            className="w-full bg-primary text-white py-3 rounded-lg hover:bg-hoverEffect transition text-lg font-semibold"
+          >
             Sign Up as {isLender ? "Lender" : "Borrower"}
           </button>
 
