@@ -1,33 +1,43 @@
 import React from "react";
-import HowItWorks from "../components/How-It-Works";
 import Navbar from "../components/PublicNavbar";
 import Hero from "../components/Hero";
 import About from "../components/About";
-import Footer from "../components/Footer";
+import HowItWorks from "../components/HowItWorks"; // Renamed for consistency
 import Faq from "../components/Faq";
 import Contact from "../components/Contact";
+import Footer from "../components/Footer";
 
 const LandingPage = () => {
   return (
-    <div>
-      <Navbar />
-      <section id="home">
+    <main>
+      <header>
+        <Navbar />
+      </header>
+
+      <section id="home" aria-label="Home Section">
         <Hero />
       </section>
-      <section id="about">
+      
+      <section id="about" aria-label="About Us">
         <About />
       </section>
-      <section id="how-it-works">
-        <HowItWorks/>
+
+      <section id="how-it-works" aria-label="How It Works">
+        <HowItWorks />
       </section>
-      <section id="faq">
-        <Faq/>
+
+      <section id="faq" aria-label="Frequently Asked Questions">
+        <Faq />
       </section>
-      <section id="contact">
-        <Contact/>
+
+      <section id="contact" aria-label="Contact Us">
+        <Contact />
       </section>
-      <Footer />
-    </div>
+
+      <footer>
+        <Footer />
+      </footer>
+    </main>
   );
 };
 
