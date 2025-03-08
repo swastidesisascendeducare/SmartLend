@@ -1,11 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
 
+const contactInfo = [
+  { icon: FaPhone, text: "+1 234 567 890", label: "Phone" },
+  { icon: FaEnvelope, text: "support@smartlend.com", label: "Email" },
+  { icon: FaMapMarkerAlt, text: "123 SmartLend Street, NY", label: "Location" },
+];
+
+const InputField = ({ type, placeholder, value, setValue }) => (
+  <input
+    type={type}
+    placeholder={placeholder}
+    value={value}
+    onChange={(e) => setValue(e.target.value)}
+    className="w-full p-3 rounded-lg bg-white text-gray-900 placeholder-gray-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary transition"
+    aria-label={placeholder}
+  />
+);
+
 const Contact = () => {
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert("Message sent! We'll get back to you soon.");
+    setFormData({ name: "", email: "", message: "" });
+  };
+
   return (
     <section id="contact" className="py-20 bg-gradient-to-br from-primary to-darkBlue text-white">
       <div className="container mx-auto text-center px-6">
+        
         {/* Section Header */}
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
@@ -28,39 +54,39 @@ const Contact = () => {
         >
           {/* Contact Details */}
           <div className="grid md:grid-cols-3 gap-6 text-center">
-            <div className="flex flex-col items-center">
-              <FaPhone className="text-3xl text-accentHighlight" />
-              <p className="text-lg mt-2">+1 234 567 890</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <FaEnvelope className="text-3xl text-accentHighlight" />
-              <p className="text-lg mt-2">support@smartlend.com</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <FaMapMarkerAlt className="text-3xl text-accentHighlight" />
-              <p className="text-lg mt-2">123 SmartLend Street, NY</p>
-            </div>
+            {contactInfo.map(({ icon: Icon, text, label }) => (
+              <div key={label} className="flex flex-col items-center">
+                <Icon className="text-3xl text-accentHighlight" aria-hidden="true" />
+                <p className="text-lg mt-2">{text}</p>
+              </div>
+            ))}
           </div>
 
           {/* Contact Form */}
-          <form className="mt-8 space-y-4">
-            <input
-                type="text"
-                placeholder="Your Name"
-                className="w-full p-3 rounded-lg bg-white text-gray-900 placeholder-gray-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary"
+          <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+            <InputField
+              type="text"
+              placeholder="Your Name"
+              value={formData.name}
+              setValue={(value) => setFormData({ ...formData, name: value })}
             />
-            <input
-                type="email"
-                placeholder="Your Email"
-                className="w-full p-3 rounded-lg bg-white text-gray-900 placeholder-gray-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary"
+            <InputField
+              type="email"
+              placeholder="Your Email"
+              value={formData.email}
+              setValue={(value) => setFormData({ ...formData, email: value })}
             />
             <textarea
-                rows="4"
-                placeholder="Your Message"
-                className="w-full p-3 rounded-lg bg-white text-gray-900 placeholder-gray-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary"
+              rows="4"
+              placeholder="Your Message"
+              value={formData.message}
+              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+              className="w-full p-3 rounded-lg bg-white text-gray-900 placeholder-gray-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary transition"
+              aria-label="Your Message"
             ></textarea>
 
             <motion.button
+              type="submit"
               whileHover={{ scale: 1.05 }}
               className="w-full bg-primary text-white py-3 rounded-lg font-semibold shadow-md hover:bg-darkBlue transition"
             >

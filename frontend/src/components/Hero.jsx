@@ -1,12 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
     <section className="bg-backgroundLight text-center py-24 relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-96 h-96 bg-primary opacity-20 blur-3xl rounded-full"></div>
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-darkBlue opacity-20 blur-3xl rounded-full"></div>
+      {/* Background Glow Effects */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-primary opacity-30 backdrop-blur-md rounded-full"></div>
+      <div className="absolute bottom-0 right-0 w-80 h-80 bg-darkBlue opacity-30 backdrop-blur-md rounded-full"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Headline */}
@@ -37,18 +38,23 @@ const Hero = () => {
           transition={{ delay: 0.5, duration: 0.8 }}
           className="mt-10 grid md:grid-cols-3 gap-6 max-w-5xl mx-auto"
         >
-          <div className="bg-white shadow-lg p-6 rounded-2xl transform transition hover:scale-105">
-            <h3 className="text-xl font-semibold text-textPrimary">🔹 Borrow with Ease</h3>
-            <p className="text-subtext mt-2">Check eligibility, apply for loans, and track repayments effortlessly.</p>
-          </div>
-          <div className="bg-white shadow-lg p-6 rounded-2xl transform transition hover:scale-105">
-            <h3 className="text-xl font-semibold text-textPrimary">💰 Secure Investments</h3>
-            <p className="text-subtext mt-2">Browse and fund loans, diversify portfolios, and monitor repayments.</p>
-          </div>
-          <div className="bg-white shadow-lg p-6 rounded-2xl transform transition hover:scale-105">
-            <h3 className="text-xl font-semibold text-textPrimary">🤖 AI-Powered Decisions</h3>
-            <p className="text-subtext mt-2">Risk assessment and automated agreement drafting using AI.</p>
-          </div>
+          {[
+            { title: "🔹 Borrow with Ease", desc: "Check eligibility, apply for loans, and track repayments effortlessly." },
+            { title: "💰 Secure Investments", desc: "Browse and fund loans, diversify portfolios, and monitor repayments." },
+            { title: "🤖 AI-Powered Decisions", desc: "Risk assessment and automated agreement drafting using AI." },
+          ].map((feature, index) => (
+            <div
+              key={index}
+              className="bg-white shadow-lg p-6 rounded-2xl transform transition hover:scale-105 border border-gray-200"
+              role="region"
+              aria-labelledby={`feature-${index}`}
+            >
+              <h3 id={`feature-${index}`} className="text-xl font-semibold text-textPrimary">
+                {feature.title}
+              </h3>
+              <p className="text-subtext mt-2">{feature.desc}</p>
+            </div>
+          ))}
         </motion.div>
 
         {/* CTA Buttons */}
@@ -58,18 +64,21 @@ const Hero = () => {
           transition={{ delay: 0.7, duration: 0.8 }}
           className="mt-10 flex justify-center space-x-6"
         >
-          <Link to="/signuppage?type=borrower">
-            <button className="bg-darkBlue hover:bg-hoverEffect text-white px-6 py-3 rounded-full shadow-lg transition transform hover:scale-105">
-              Get a Loan
-            </button>
+          <Link
+            to="/signuppage?type=borrower"
+            className="bg-darkBlue hover:bg-hoverEffect text-white px-8 py-4 rounded-full shadow-lg transition transform hover:scale-105"
+            aria-label="Get a Loan"
+          >
+            Get a Loan
           </Link>
-          <Link to="/signuppage?type=lender">
-            <button className="bg-primary hover:bg-hoverEffect text-white px-6 py-3 rounded-full shadow-lg transition transform hover:scale-105">
-              Invest Now
-            </button>
+          <Link
+            to="/signuppage?type=lender"
+            className="bg-primary hover:bg-hoverEffect text-white px-8 py-4 rounded-full shadow-lg transition transform hover:scale-105"
+            aria-label="Invest Now"
+          >
+            Invest Now
           </Link>
         </motion.div>
-
       </div>
     </section>
   );

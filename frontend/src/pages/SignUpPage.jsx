@@ -11,10 +11,34 @@ const SignUpPage = () => {
   const navigate = useNavigate();
 
   const [isLender, setIsLender] = useState(initialType);
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+    phoneNumber: "",
+    loanAmount: "",
+    lenderType: "individual",
+  });
 
   useEffect(() => {
     setIsLender(initialType);
   }, [initialType]);
+
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add form validation & API integration here
+    console.log("Submitted Form Data:", formData);
+    navigate("/dashboard");
+  };
 
   return (
     <div className="relative w-full h-screen flex items-center justify-center px-6" style={{ backgroundImage: `url(${gradient})`, backgroundSize: "cover" }}

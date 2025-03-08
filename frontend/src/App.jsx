@@ -4,8 +4,6 @@ import LandingPage from "./pages/LandingPage";
 import SignupPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import BorrowerDashboard from "./components/BorrowerDashboard";
-import BorrowerNavbar from "./components/BorrowerNavbar"; // New Navbar for Borrowers
-import PublicNavbar from "./components/PublicNavbar"; // Navbar for non-logged-in users
 import LoanApplicationPage from "./pages/LoanApplication";
 import BorrowerEditProfile from "./components/profile/BorrowerEditProfile";
 import LenderEditProfile from "./components/profile/LenderEditProfile";
