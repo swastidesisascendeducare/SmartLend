@@ -1,4 +1,5 @@
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -17,7 +18,7 @@ const Footer = () => {
           <ul className="mt-2 space-y-2">
             <li><a href="/about" className="hover:text-hoverEffect transition">About</a></li>
             <li><a href="/faq" className="hover:text-hoverEffect transition">FAQ</a></li>
-            <li><a href="/privacy-policy" className="hover:text-hoverEffect transition">Privacy Policy</a></li>
+            <li><Link to="/privacy-policy" className="hover:text-hoverEffect transition">Privacy Policy</Link></li>
             <li><a href="/contact" className="hover:text-hoverEffect transition">Contact</a></li>
           </ul>
         </div>
