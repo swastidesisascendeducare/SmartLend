@@ -70,4 +70,7 @@ const BorrowerSchema = new mongoose.Schema({
   ],
 }, { timestamps: true });
 
-module.exports = mongoose.model("Borrower", BorrowerSchema);
+// module.exports = mongoose.model("Borrower", BorrowerSchema); //by Vidhi at 12:57 p.m. for borrower Profile
+
+module.exports = mongoose.models.Borrower || mongoose.model("Borrower", BorrowerSchema);
+
