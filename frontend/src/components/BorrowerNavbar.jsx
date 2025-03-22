@@ -10,6 +10,7 @@ const navLinks = [
   { path: "/loan-status", label: "Loan Status" },
   { path: "/repayment-tracking", label: "Repayment Tracking" },
   { path: "/loan-agreement", label: "Loan Agreement" },
+  { path: "/ocr-upload", label: "Upload Documents" }, // Added OCR Upload Page
 ];
 
 const BorrowerNavbar = () => {
