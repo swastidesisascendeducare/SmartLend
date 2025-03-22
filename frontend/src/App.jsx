@@ -18,6 +18,7 @@ import NotificationsPage from "./pages/NotificationsPage";
 import LoanStatusPage from "./pages/LoanApprovalStatus";
 import LoanAgreementPage from "./pages/LoanAgreement";
 import RepaymentTrackingPage from "./pages/RepaymentTracking";
+import OCR from "./pages/OCR";
 import LenderDashboard from "./pages/lender/LenderDashboard";
 import LoanMatchingFunding from "./pages/lender/LoanMatchingFunding";
 import CollaborativeLoanFunding from "./pages/lender/CollaborativeLoanFunding";
@@ -75,6 +76,7 @@ const App = () => {
                 <Route path="/repayment-tracking" element={<RepaymentTrackingPage />} />
                 <Route path="/borrower-profile" element={<BorrowerProfile />} />
                 <Route path="/borrower-profile/edit" element={<BorrowerEditProfile />} />
+                <Route path="/ocr-upload" element={<OCR />} /> {/* Added OCR Route */}                 
               </>
             )}
 
