@@ -375,7 +375,7 @@ const LoanApplication = () => {
         setError(res.data.error);
         setPrediction(null);
       } else {
-        setPrediction(res.data.approved ? "✅ Loan Approved!" : "❌ Loan Denied!");
+        setPrediction(res.data.approved ? "❌ Loan Denied!" :  "✅ Loan Approved!");
         setShowPopup(true);
         setTimeout(() => setShowPopup(false), 3000); // Hide popup after 3 seconds
       }
