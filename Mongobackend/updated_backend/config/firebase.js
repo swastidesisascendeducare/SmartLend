@@ -7,4 +7,11 @@ admin.initializeApp({
   databaseURL: "https://smartlend-4e7bd.firebaseio.com" // ✅ Replace with your Firebase project URL
 });
 
+// on 26th march
+// Set SameSite in cookies to 'None'
+const sessionCookieOptions = {
+  sameSite: 'none',
+  secure: true // Ensure it's secure when in production
+};
+
 module.exports = admin;
