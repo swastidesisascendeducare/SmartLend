@@ -47,12 +47,14 @@ const transactionRoutes = require("./routes/transactionRoutes");
 // const borrowerProfileRoutes = require("./routes/borrowerProfileRoutes");
 // const lenderProfileRoutes = require('./routes/lenderProfileRoutes');
 const authRoutes = require('./routes/authRoutes'); // ✅ Import route
+const aiRoutes = require('./routes/aiRoutes')
 
 
 app.use('/api/borrowers', borrowerRoutes);
 app.use('/api/lenders', lenderRoutes);
 app.use('/api/loans', loanRoutes);
 app.use("/api/transactions", transactionRoutes);
+app.use("/api/ai",aiRoutes);
 // app.use("/api/borrower-profile", borrowerProfileRoutes);
 // app.use('/api/lender', lenderProfileRoutes);
 app.use('/api/auth', authRoutes); //register route

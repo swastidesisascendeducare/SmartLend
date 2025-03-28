@@ -15,7 +15,7 @@ const LoanSchema = new mongoose.Schema({
     {
       lenderId: { type: mongoose.Schema.Types.ObjectId, ref: "Lender" },
       amount: { type: Number },
-      interestRate: { type: Number }
+      interestRate: { type: Number },
     }
   ]
 }, { timestamps: true });
