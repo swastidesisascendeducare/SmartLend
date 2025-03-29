@@ -1,7 +1,6 @@
 // import React, { useState } from "react";
 // import { CheckCircle, Clock, XCircle, CreditCard } from "lucide-react"; // Icons for better UI
 // import BorrowerLayout from "../components/BorrowerLayout";
-
 // const RepaymentTracking = () => {
 //   const [repayments, setRepayments] = useState([
 //     { id: 1, dueDate: "2025-03-10", amount: "$500", status: "Upcoming" },
@@ -74,9 +73,7 @@
 //     </div>
 //   );
 // };
-
 // export default RepaymentTracking;
-
 
 import React, { useState, useEffect } from "react";
 import { CheckCircle, Clock, XCircle, CreditCard } from "lucide-react";
@@ -210,3 +207,4 @@ const RepaymentTracking = () => {
 };
 
 export default RepaymentTracking;
+
