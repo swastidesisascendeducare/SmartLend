@@ -37,7 +37,7 @@ const LoanMatchingFunding = () => {
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">Loan Matching & Funding</h1>
       
-      {/* Filter Options */}
+      {/* Filter Options
       <div className="mb-4">
         <label className="mr-2 font-semibold">Filter by Risk Level:</label>
         <select
@@ -50,7 +50,7 @@ const LoanMatchingFunding = () => {
           <option value="Medium">Medium</option>
           <option value="High">High</option>
         </select>
-      </div>
+      </div> */}
 
       {/* Loan Requests */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -61,9 +61,9 @@ const LoanMatchingFunding = () => {
       <p className="text-gray-600">Loan Amount: ₹{loan.loanAmount}</p>
       <p className="text-gray-600">Interest Rate: {loan.interestRate}%</p>
       <p className="text-gray-600">Duration: {loan.loanTerm}</p>
-      <p className={`font-semibold ${loan.risk === "High" ? "text-red-500" : loan.risk === "Medium" ? "text-orange-500" : "text-green-500"}`}>
+      {/* <p className={`font-semibold ${loan.risk === "High" ? "text-red-500" : loan.risk === "Medium" ? "text-orange-500" : "text-green-500"}`}>
         Risk Level: {loan.risk}
-      </p>
+      </p> */}
 
       {/* Funding Progress Bar */}
       <div className="mt-4 bg-gray-200 h-4 rounded-full overflow-hidden">

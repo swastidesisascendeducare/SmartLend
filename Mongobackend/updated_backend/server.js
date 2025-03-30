@@ -118,7 +118,8 @@ const lenderRoutes = require('./routes/lenderRoutes');
 const loanRoutes = require('./routes/loanRoutes'); // Loan routes already handle `/match/:borrowerId`
 const transactionRoutes = require("./routes/transactionRoutes");
 const authRoutes = require('./routes/authRoutes');
-const testRoute = require('./routes/test');const aiRoutes = require('./routes/aiRoutes')
+const testRoute = require('./routes/test');
+const aiRoutes = require('./routes/aiRoutes')
 
 
 app.use('/api/borrowers', borrowerRoutes);

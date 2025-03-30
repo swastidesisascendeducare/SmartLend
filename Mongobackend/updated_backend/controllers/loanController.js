@@ -883,12 +883,14 @@ exports.fundLoan = async (req, res) => {
 exports.getBorrowerMatches = async (req,res) => {
   try{
     const {lenderId} = req.params;
+    console.log("Lender ID:", lenderId);
     const lender = await Lender.findById(lenderId);
     if (!lender) return res.status(404).json({ message: "Lender not found" });
 
     console.log("Lender data",lender)
 
     const eligibleBorrowers = await Borrower.find({
+      loanAmount: { $lte: lender.availableFunds},
       loanAmount: { $lte: lender.maxLoanAmount }, // Loan amount should be within Lender's limit
       interestRate: { $gte: lender.minInterestRate }, // Interest rate should be at least what Lender expects
       loanTerm: { $lte: lender.maxLoanTerm }, // Loan term should not exceed Lender's preference
