@@ -13,7 +13,7 @@ const InvestmentPreferencesForm = ({ formData, setFormData}) => {
               Total Funds Available for Lending (₹)
             </label>
             <input
-              type="number"
+              type="text"
               id="availableFunds"
               name="availableFunds"
               value={formData.availableFunds || ""}
@@ -27,7 +27,7 @@ const InvestmentPreferencesForm = ({ formData, setFormData}) => {
               Minimum Acceptable Interest Rate (%)
             </label>
             <input
-              type="number"
+              type="text"
               id="minInterestRate"
               name="minInterestRate"
               value={formData.minInterestRate || ""}
@@ -41,7 +41,7 @@ const InvestmentPreferencesForm = ({ formData, setFormData}) => {
               Maximum Single Loan Amount (₹)
             </label>
             <input
-              type="number"
+              type="text"
               id="maxLoanAmount"
               name="maxLoanAmount"
               value={formData.maxLoanAmount || ""}
@@ -55,31 +55,13 @@ const InvestmentPreferencesForm = ({ formData, setFormData}) => {
               Maximum Loan Term (Months)
             </label>
             <input
-              type="number"
+              type="text"
               id="maxLoanTerm"
               name="maxLoanTerm"
               value={formData.maxLoanTerm || ""}
               onChange={handleChange}
               className="mt-1 block w-full border rounded p-2 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
             />
-          </div>
-  
-          <div>
-            <label htmlFor="riskAppetite" className="block text-sm font-medium text-gray-700 mb-1">
-              Risk Appetite
-            </label>
-            <select
-              id="riskAppetite"
-              name="riskAppetite"
-              value={formData.riskAppetite || ""}
-              onChange={handleChange}
-              className="mt-1 block w-full border rounded p-2 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-            >
-              <option value="">Select</option>
-              <option value="Low">Low</option>
-              <option value="Medium">Medium</option>
-              <option value="High">High</option>
-            </select>
           </div>
         </div>
       </div>

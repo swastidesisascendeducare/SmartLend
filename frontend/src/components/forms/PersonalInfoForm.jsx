@@ -15,7 +15,7 @@ const PersonalInfoForm = ({ formData, setFormData}) => {
               type="text"
               id="fullName"
               name="fullName"
-              value={formData.fullName || ""}
+              value={formData.name || ""}
               onChange={handleChange}
               placeholder="Enter your full name"
               className="mt-1 block w-full border rounded p-2 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
