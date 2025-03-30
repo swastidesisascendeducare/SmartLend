@@ -4,7 +4,7 @@ const Lender = require('../models/lenderModel');
 const Borrower = require("../models/borrowerModel");
 const Loan = require("../models/loanModel");
 
-
+const API_KEY = "AIzaSyBIejn1A_MoM1YfiSi-KwCQsgBWt52l4pE"
 const genAI = new GoogleGenerativeAI(API_KEY);
 const model = genAI.getGenerativeModel({
   model: "gemini-1.5-flash",
@@ -36,7 +36,7 @@ const model = genAI.getGenerativeModel({
 exports.getAgreement = async (req, res) => {
     console.log("AI route HIT")
     const loan = await Loan.findById('67df08f7221149e1e28adcac')
-    const lender = await Lender.findById('67de8c6b8f68af768a3ec0c9')
+    const lender = await Lender.findById('67de9cb6f1728e1e9523bf9d')
     const borrower = await Borrower.findById(loan.borrowerId)
 
     console.log("Loan Model:",loan)

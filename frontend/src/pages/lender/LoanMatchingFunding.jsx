@@ -19,7 +19,7 @@ const LoanMatchingFunding = () => {
     const fetchLoans = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5001/api/loans/get-eligible-borrowers/${'67dc7556bb681b1e22c1254f'}`
+          `http://localhost:5001/api/loans/get-eligible-borrowers/${'67de9cb6f1728e1e9523bf9d'}`
         );
         console.log(response.data)
         setLoanRequests(response.data);

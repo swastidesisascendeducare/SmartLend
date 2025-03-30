@@ -603,7 +603,7 @@ function LoanPage() {
         setSelectedLenders(selectedLenders.filter((id) => id !== loanId));
       } else {
         const requestBody = {
-          borrowerId: "67dadbc239be500f27cc1d19",
+          borrowerId: "67e79f25380f8ee9318dd9b1",
           amountRequested: amount,
           interestRate: lender.interestRate,
           loanTerm: lender.loanTerm,
@@ -621,7 +621,7 @@ function LoanPage() {
     }
   };
 
-  const remainingAmount = 100000 - requestedAmount;
+  const remainingAmount = requestedAmount;
 
   const filteredLoans = lenders.filter((loan) => {
     return (

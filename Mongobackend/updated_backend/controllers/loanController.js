@@ -705,6 +705,7 @@
 const mongoose = require("mongoose");
 const Loan = require("../models/loanModel");
 const Borrower = require("../models/borrowerModel");
+const Lender = require("../models/lenderModel");
 
 exports.getLoanDetails = async (req, res) => {
   const lenderId = req.params.lenderId; // Extract lenderId from route params

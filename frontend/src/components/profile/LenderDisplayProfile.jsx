@@ -9,10 +9,10 @@ const lenderData = {
   phone: "9876543210",
   address: "456 Market St, San Francisco, CA 94103",
   profilePicture: "https://via.placeholder.com/150",
-  availableFunds: "₹50,000",
-  minInterestRate: "8%",
-  maxLoanAmount: "₹100,000",
-  maxLoanTerm: "24 months",
+  availableFunds: "₹2,00,000",
+  minInterestRate: "3%",
+  maxLoanAmount: "₹300,000",
+  maxLoanTerm: "18 months",
   riskAppetite: "Moderate",
   bankDetails: {
     accountNumber: "9876543210",
@@ -40,7 +40,7 @@ const LenderDisplayProfile = () => {
         {/* 🔹 Greeting Section */}
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-4xl font-bold">Hello {lenderData.name.split(" ")[0]}</h1>
+            <h1 className="text-4xl font-bold">Hello Rishabh</h1>
             <p className="text-gray-600 mt-2">
                 Take control of your profile and stay on top of your financial investments with ease.
             </p>
@@ -109,27 +109,27 @@ const StatCard = ({ label, value }) => (
 // ✅ Section Components (Now Clickable)
 const PersonalDetails = ({ lenderData, onClick }) => (
   <Card title="Personal Information" onClick={onClick}>
-    <ProfileItem label="Name" value={lenderData.name} />
-    <ProfileItem label="Email" value={lenderData.email} />
-    <ProfileItem label="Phone" value={lenderData.phone} />
-    <ProfileItem label="Address" value={lenderData.address} />
+    <ProfileItem label="Name" value="Rishabh Dixit" />
+    <ProfileItem label="Email" value="Rishabh@gmail.com" />
+    <ProfileItem label="Phone" value="8264675692" />
+    <ProfileItem label="Address" value="Koramangala, Bangalore, India" />
   </Card>
 );
 
 const InvestmentDetails = ({ lenderData, onClick }) => (
   <Card title="Investment Preferences" onClick={onClick}>
-    <ProfileItem label="Available Funds" value={lenderData.availableFunds} />
-    <ProfileItem label="Minimum Interest Rate" value={lenderData.minInterestRate} />
-    <ProfileItem label="Maximum Loan Amount" value={lenderData.maxLoanAmount} />
-    <ProfileItem label="Maximum Loan Term" value={lenderData.maxLoanTerm} />
-    <ProfileItem label="Risk Appetite" value={lenderData.riskAppetite} />
+    <ProfileItem label="Available Funds" value="200000" />
+    <ProfileItem label="Minimum Interest Rate" value="3" />
+    <ProfileItem label="Maximum Loan Amount" value="300000" />
+    <ProfileItem label="Maximum Loan Term" value="18" />
+    <ProfileItem label="Risk Appetite" value="Medium" />
   </Card>
 );
 
 const BankDetails = ({ lenderData, onClick }) => (
   <Card title="Bank Details" onClick={onClick}>
-    <ProfileItem label="Account Number" value={lenderData.bankDetails.accountNumber} />
-    <ProfileItem label="IFSC Code" value={lenderData.bankDetails.ifscCode} />
+    <ProfileItem label="Account Number" value="839519847347" />
+    <ProfileItem label="IFSC Code" value="HDFC0004386" />
   </Card>
 );
 

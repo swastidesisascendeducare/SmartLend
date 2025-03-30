@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { getLoanMatches, getBestCollaborativeFunding, fundLoan, requestLoan, getLoanDetails } = require("../controllers/loanController");
+const { getLoanMatches, getBestCollaborativeFunding, fundLoan, requestLoan, getLoanDetails, getBorrowerMatches } = require("../controllers/loanController");
 
 const Loan = require("../models/loanModel"); // Adjust path as needed
 // const { getLoanMatches, getBestCollaborativeFunding, fundLoan, requestLoan, getBorrowerMatches } = require("../controllers/loanController");
