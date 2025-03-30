@@ -47,7 +47,7 @@ const TermsAndConditions = () => {
 
 const Sidebar = ({ sections }) => {
   return (
-    <aside className="w-64 bg-gray-100 p-6 hidden lg:block">
+    <aside className="w-64 bg-gray-100 p-6 hidden lg:block sticky top-20 h-fit">
       <ul className="space-y-4">
         {sections.map((section) => (
           <li key={section}>
@@ -212,9 +212,13 @@ const sections = [
     id: "Contact Information",
     title: "17. Contact Information",
     content: [
-      `For questions or concerns, please contact us at [support@smartlend.com](mailto:support@smartlend.com).`,
+      "For questions or concerns, please contact us at ",
+      <a href="mailto:smartlend25@gmail.com" className="text-blue-600 hover:underline">
+        smartlend25@gmail.com
+      </a>,
+      "."
     ],
-  },
+  }
 ];
 
 export default TermsAndConditions;

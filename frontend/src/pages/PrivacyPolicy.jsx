@@ -40,7 +40,7 @@ const PrivacyPolicy = () => {
 
 const Sidebar = ({ sections }) => {
   return (
-    <aside className="w-64 bg-gray-100 p-6 hidden lg:block">
+    <aside className="w-64 bg-gray-100 p-6 hidden lg:block sticky top-20 h-fit">
       <ul className="space-y-4">
         {sections.map((section) => (
           <li key={section}>
@@ -144,10 +144,13 @@ const sections = [
     id: "Contact Us",
     title: "10. Contact Us",
     content: [
-      `If you have any questions about this Privacy Policy or wish to exercise your rights under applicable law.`,
-      `Contact us at privacy@smartlend.uk`
-    ]
-  }
+      "If you have any questions about this Privacy Policy or wish to exercise your rights under applicable law.",
+      `Contact us at `,
+      <a href="mailto:smartlend25@gmail.com" className="text-blue-600 hover:underline">
+        smartlend25@gmail.com
+      </a>,
+    ],
+  }  
 ];
 
 export default PrivacyPolicy;
