@@ -334,7 +334,6 @@ const App = () => {
                 <Route path="/dashboard" element={<BorrowerDashboard />} />
                 <Route path="/loan-application" element={<LoanApplicationPage />} />
                 <Route path="/loan-status" element={<LoanStatusPage />} />
-                <Route path="/loan-agreement" element={<LoanAgreementPage />} />
                 <Route path="/repayment-tracking" element={<RepaymentTrackingPage />} />
                 <Route path="/borrower-profile" element={<BorrowerProfile />} />
                 <Route path="/borrower-profile/edit" element={<BorrowerEditProfile />} />
