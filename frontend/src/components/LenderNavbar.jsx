@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Menu, X, UserCircle } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Menu, X, UserCircle, LogOut } from "lucide-react";
 import SmartLendLogo from "../assets/SmartLendLogo7.png";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -12,8 +12,14 @@ const navLinks = [
   { path: "/loan-agreement-review", label: "Agreement Review" },
 ];
 
-const LenderNavbar = () => {
+const LenderNavbar = ({ onLogout }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    onLogout();
+    navigate("/");
+  };
 
   return (
     <nav className="bg-blue-600 shadow-md fixed w-full top-0 z-50" role="navigation" aria-label="Main Navigation">
@@ -25,10 +31,12 @@ const LenderNavbar = () => {
         </Link>
 
         {/* Logo */}
-        <img src={SmartLendLogo} alt="SmartLend Logo" className="h-10" />
+        <Link to="/lender-dashboard" onClick={() => window.scrollTo(0, 0)}>
+          <img src={SmartLendLogo} alt="SmartLend Logo" className="h-10 cursor-pointer" />
+        </Link>
 
         {/* Desktop Navigation */}
-        <ul className="hidden md:flex space-x-6 text-white font-semibold">
+        <ul className="hidden md:flex space-x-6 text-white font-semibold items-center">
           {navLinks.map((link) => (
             <li key={link.path}>
               <Link to={link.path} className="cursor-pointer hover:text-[#F5FFC3]">
@@ -36,6 +44,16 @@ const LenderNavbar = () => {
               </Link>
             </li>
           ))}
+          {/* Logout Button */}
+          <li>
+            <button
+              onClick={handleLogout}
+              className="flex items-center space-x-2 text-white hover:text-[#F5FFC3] focus:outline-none"
+            >
+              <LogOut size={20} />
+              <span>Logout</span>
+            </button>
+          </li>
         </ul>
 
         {/* Mobile Menu Button */}
@@ -68,6 +86,14 @@ const LenderNavbar = () => {
                 {link.label}
               </Link>
             ))}
+            {/* Mobile Logout Button */}
+            <button
+              onClick={handleLogout}
+              className="mt-4 flex items-center justify-center space-x-2 w-full text-white hover:text-[#F5FFC3]"
+            >
+              <LogOut size={20} />
+              <span>Logout</span>
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
