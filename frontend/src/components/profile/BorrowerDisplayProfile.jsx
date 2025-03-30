@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 
 // Borrower Data
 const borrowerData = {
-  name: "John Doe",
-  email: "john.doe@example.com",
-  phone: "1234567890",
-  address: "123 Main St, New York, NY 10001",
+  name: "Vidhi Arora",
+  email: "aroravidhi342@gmail.com",
+  phone: "9315523457",
+  address: "93, PRIYA ENCLAVE, DELHI-110095",
   profilePicture: "https://via.placeholder.com/150",
-  loanAmount: "$10,000",
-  loanPurpose: "Personal Loan",
+  loanAmount: "1,00,000",
+  loanPurpose: "Home Renovation",
   loanTerm: "12 months",
-  annualIncome: "$50,000",
-  creditScore: "750",
+  annualIncome: "10,00,000",
+  creditScore: "780",
   bankDetails: {
     accountNumber: "1234567890",
     ifscCode: "ABC1234567",
