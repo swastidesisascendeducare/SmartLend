@@ -45,25 +45,19 @@ const Contact = () => {
           Have questions? Reach out to us anytime. We're here to help!
         </p>
 
-        {/* Contact Card */}
+        {/* Contact Email */}
+        <p className="text-lg font-semibold mt-6">
+          Email us at: <a href="mailto:smartlend25@gmail.com" className="text-accentHighlight underline">smartlend25@gmail.com</a>
+        </p>
+
+        {/* Contact Form */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 0.8 }}
           className="mt-12 max-w-3xl mx-auto bg-white bg-opacity-10 backdrop-blur-md p-8 rounded-2xl shadow-lg"
         >
-          {/* Contact Details */}
-          <div className="grid md:grid-cols-3 gap-6 text-center">
-            {contactInfo.map(({ icon: Icon, text, label }) => (
-              <div key={label} className="flex flex-col items-center">
-                <Icon className="text-3xl text-accentHighlight" aria-hidden="true" />
-                <p className="text-lg mt-2">{text}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Contact Form */}
-          <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <InputField
               type="text"
               placeholder="Your Name"
@@ -100,3 +94,4 @@ const Contact = () => {
 };
 
 export default Contact;
+

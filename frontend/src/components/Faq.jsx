@@ -5,23 +5,23 @@ import { motion, AnimatePresence } from "framer-motion";
 const faqs = [
   {
     question: "What is SmartLend?",
-    answer: "SmartLend is an AI-powered peer-to-peer lending platform that connects borrowers and lenders directly, offering secure and transparent transactions.",
+    answer: "SmartLend is a peer-to-peer lending platform that connects borrowers with lenders, enabling secure and transparent loan transactions.",
   },
   {
     question: "How do I apply for a loan?",
-    answer: "Simply sign up, complete verification, and submit a loan request with details like amount, duration, and purpose.",
+    answer: "Sign up, complete verification, and submit a loan request with details like the amount, duration, and purpose. Lenders can then review and fund your request.",
   },
   {
-    question: "How does loan matching work?",
-    answer: "Our AI analyzes borrower profiles and risk factors to match them with suitable lenders for optimal funding.",
+    question: "How does the lending process work?",
+    answer: "Borrowers submit loan requests, and lenders can choose to fund them based on their preferences. Once funded, the loan is disbursed, and repayments follow the agreed schedule.",
   },
   {
     question: "Is my investment safe as a lender?",
-    answer: "SmartLend provides AI-powered risk assessments and secure agreements to help lenders make informed decisions.",
+    answer: "While all loans come with some risk, SmartLend provides legally binding agreements and transparent borrower details to help lenders make informed decisions.",
   },
   {
     question: "Are there any fees for using SmartLend?",
-    answer: "There are minimal processing fees for certain transactions, but registration and loan browsing are completely free.",
+    answer: "Registration is free. A small processing fee applies to certain transactions, such as loan disbursements and repayments.",
   },
 ];
 
