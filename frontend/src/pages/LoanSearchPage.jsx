@@ -547,6 +547,197 @@
 // export default LoanPage;
 
 
+// import React, { useState, useEffect } from "react";
+// import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+// import "react-tabs/style/react-tabs.css";
+// import Slider from "rc-slider";
+// import "rc-slider/assets/index.css";
+// import axios from "axios";
+
+// const appliedLoanAmount = 10000; // Loan amount borrower applied for
+
+// function LoanPage() {
+//   const [lenders, setLenders] = useState([]);
+//   const [requestedAmount, setRequestedAmount] = useState(0);
+//   const [selectedLenders, setSelectedLenders] = useState([]);
+//   const [interestRateFilter, setInterestRateFilter] = useState([0, 15]);
+//   const [tenureFilter, setTenureFilter] = useState("All");
+
+//   const tenureOptions = ["All", "6 months", "12 months", "18 months", "24 months"];
+
+//   useEffect(() => {
+//     const fetchLoanMatches = async () => {
+//       try {
+//         const borrowerId = "67e79f25380f8ee9318dd9b1"; // Replace with actual borrower ID
+//         const response = await axios.get(
+//           `http://localhost:5001/api/loans/match/${borrowerId}`
+//         );
+//         console.log("Loan Matches:", response.data);
+//         setLenders(response.data);
+//       } catch (error) {
+//         console.error("Error fetching loan matches:", error.response?.data || error.message);
+//       }
+//     };
+
+//     const fetchCollaborativeFunding = async () => {
+//       try {
+//         const response = await axios.get("http://localhost:5001/api/loans/best-collaborative");
+//         console.log("Collaborative Loans:", response.data);
+//         setLenders((prevLenders) => [...prevLenders, ...response.data]);
+//       } catch (error) {
+//         console.error("Error fetching collaborative funding:", error.response?.data || error.message);
+//       }
+//     };
+
+//     fetchLoanMatches();
+//     fetchCollaborativeFunding();
+//   }, []);
+
+//   const handleRequest = async (lender) => {
+//     try {
+//       const loanId = lender._id;
+//       const amount = lender.amountRequested;
+
+//       if (selectedLenders.includes(loanId)) {
+//         setRequestedAmount(requestedAmount - amount);
+//         setSelectedLenders(selectedLenders.filter((id) => id !== loanId));
+//       } else {
+//         const requestBody = {
+//           borrowerId: "67dadbc239be500f27cc1d19",
+//           amountRequested: amount,
+//           interestRate: lender.interestRate,
+//           loanTerm: lender.loanTerm,
+//           approvedByML: true,
+//         };
+
+//         const response = await axios.post("http://localhost:5001/api/loans/request-loan", requestBody);
+
+//         console.log(response.data);
+//         setRequestedAmount(requestedAmount + amount);
+//         setSelectedLenders([...selectedLenders, loanId]);
+//       }
+//     } catch (error) {
+//       console.error("Error requesting loan:", error.response?.data || error.message);
+//     }
+//   };
+
+//   const remainingAmount = 100000 - requestedAmount;
+
+//   const filteredLoans = lenders.filter((loan) => {
+//     return (
+//       loan.interestRate >= interestRateFilter[0] &&
+//       loan.interestRate <= interestRateFilter[1] &&
+//       (tenureFilter === "All" || `${loan.loanTerm} months` === tenureFilter)
+//     );
+//   });
+
+//   return (
+//     <div className="flex flex-col items-center p-6 w-full max-w-6xl mx-auto bg-gray-100 rounded-lg shadow-md">
+//       <h2 className="text-4xl font-bold mb-4">Loan Options</h2>
+
+//       <div className="flex flex-row w-full">
+//         {/* Sidebar Filters */}
+//         <div className="w-64 bg-white p-4 rounded-lg shadow-sm mr-4">
+//           <h3 className="text-lg font-bold mb-2">Filters</h3>
+//           <label className="block mb-2 font-semibold">Interest Rate Filter:</label>
+//           <div className="mb-4">
+//             <Slider
+//               range
+//               value={interestRateFilter}
+//               onChange={setInterestRateFilter}
+//               min={0}
+//               max={20}
+//               step={1}
+//             />
+//             <div className="flex justify-between text-gray-600">
+//               <span>{interestRateFilter[0]}%</span>
+//               <span>{interestRateFilter[1]}%</span>
+//             </div>
+//           </div>
+
+//           <label className="block mb-2 font-semibold">Tenure Filter:</label>
+//           <select
+//             value={tenureFilter}
+//             onChange={(e) => setTenureFilter(e.target.value)}
+//             className="block w-full p-2 text-sm text-gray-700 border border-gray-200 rounded-lg focus:outline-none focus:ring-blue-500"
+//           >
+//             {tenureOptions.map((option) => (
+//               <option key={option} value={option}>
+//                 {option}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+
+//         {/* Loan List */}
+//         <div className="flex-1 bg-white p-4 rounded-lg shadow-sm">
+//           <Tabs>
+//             <TabList>
+//               <Tab>Loan Matches</Tab>
+//               <Tab>Collaborative Loans</Tab>
+//             </TabList>
+
+//             {/* Loan Matches Tab */}
+//             <TabPanel>
+//               <h3 className="text-2xl font-semibold mb-4">Loan Matches</h3>
+//               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//                 {filteredLoans.map((loan) => (
+//                   <div key={loan._id} className="p-4 bg-gray-50 border rounded-lg shadow-sm">
+//                     <h4 className="text-lg font-semibold">Loan ID: {loan._id}</h4>
+//                     <p className="text-sm text-gray-600">Amount: ₹{loan.amountRequested}</p>
+//                     <p className="text-sm text-gray-600">Interest Rate: {loan.interestRate}%</p>
+//                     <p className="text-sm text-gray-600">Tenure: {loan.loanTerm} months</p>
+//                     <button
+//                       onClick={() => handleRequest(loan)}
+//                       className={`mt-2 px-4 py-2 ${
+//                         selectedLenders.includes(loan._id) ? "bg-red-500" : "bg-blue-500"
+//                       } text-white rounded-lg`}
+//                     >
+//                       {selectedLenders.includes(loan._id) ? "Cancel" : "Request Loan"}
+//                     </button>
+//                   </div>
+//                 ))}
+//               </div>
+//             </TabPanel>
+
+//             {/* Collaborative Loan Tab */}
+//             <TabPanel>
+//               <h3 className="text-2xl font-semibold mb-4">Collaborative Loans</h3>
+//               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//                 {filteredLoans.map((loan) => (
+//                   <div key={loan._id} className="p-4 bg-gray-50 border rounded-lg shadow-sm">
+//                     <h4 className="text-lg font-semibold">Loan ID: {loan._id}</h4>
+//                     <p className="text-sm text-gray-600">Amount: ₹{loan.amountRequested}</p>
+//                     <p className="text-sm text-gray-600">Interest Rate: {loan.interestRate}%</p>
+//                     <p className="text-sm text-gray-600">Tenure: {loan.loanTerm} months</p>
+//                     <button
+//                       onClick={() => handleRequest(loan)}
+//                       className={`mt-2 px-4 py-2 ${
+//                         selectedLenders.includes(loan._id) ? "bg-red-500" : "bg-blue-500"
+//                       } text-white rounded-lg`}
+//                     >
+//                       {selectedLenders.includes(loan._id) ? "Cancel" : "Request Loan"}
+//                     </button>
+//                   </div>
+//                 ))}
+//               </div>
+//             </TabPanel>
+//           </Tabs>
+
+//           {/* Remaining Amount Indicator */}
+//           <div className="mt-6 text-center">
+//             <p className="text-lg font-semibold">
+//               Remaining Amount to be Requested: ₹{remainingAmount}
+//             </p>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default LoanPage;
+
 import React, { useState, useEffect } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
@@ -568,7 +759,7 @@ function LoanPage() {
   useEffect(() => {
     const fetchLoanMatches = async () => {
       try {
-        const borrowerId = "67e79f25380f8ee9318dd9b1"; // Replace with actual borrower ID
+        const borrowerId = "67d5e48e6322d17a985de753"; // Replace with actual borrower ID
         const response = await axios.get(
           `http://localhost:5001/api/loans/match/${borrowerId}`
         );
