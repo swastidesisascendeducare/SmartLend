@@ -375,7 +375,7 @@ const LoanApplication = () => {
         setError(res.data.error);
         setPrediction(null);
       } else {
-        setPrediction(res.data.approved ? "❌ Loan Denied!" :  "✅ Loan Approved!");
+        setPrediction(res.data.approved ? "❌ Not Eligible for Loan" :  "✅ Eligible for Loan");
         setShowPopup(true);
         setTimeout(() => setShowPopup(false), 3000); // Hide popup after 3 seconds
       }
@@ -400,7 +400,7 @@ const LoanApplication = () => {
       {showPopup && (
         <motion.div
           className={`fixed top-20 left-1/2 transform -translate-x-1/2 p-4 rounded-lg shadow-lg ${
-            prediction.includes("Approved") ? "bg-green-500" : "bg-red-500"
+            prediction.includes("Approved") ? "bg-red-500" :  "bg-green-500"
           } text-white font-bold text-xl`}
           initial={{ scale: 0.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}

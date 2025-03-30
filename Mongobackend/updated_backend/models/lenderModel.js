@@ -27,7 +27,7 @@
 //   address: { type: String, required: false },
 
 //   // Investment Details
-//   availableFunds: { type: Number, required: false }, // Total funds available for lending
+//   availableFunds: { type: Number, required: false }, // Total funds available for lending=
 //   minInterestRate: { type: Number, required: false }, // Minimum acceptable interest rate
 //   maxLoanAmount: { type: Number, required: false }, // Maximum single loan they can fund
 //   maxLoanTerm: { type: Number, required: false }, // Maximum tenure lender is okay with
