@@ -115,9 +115,7 @@ const BorrowerDashboard = () => {
   const [error, setError] = useState(false);
   const [creditScore, setCreditScore] = useState(750);
   const [notifications, setNotifications] = useState([
-    "Upcoming EMI due on March 15, 2025",
-    "Low balance warning: Add funds for next EMI",
-    "Limited-time offer: Lower interest rate available",
+    "Upcoming EMI due on April 04, 2025",
   ]);
 
   useEffect(() => {
@@ -125,8 +123,7 @@ const BorrowerDashboard = () => {
     setTimeout(() => {
       try {
         setLoanData([
-          { id: "LN001", amount: 5000, status: "Approved", nextPayment: "2025-03-15", paidAmount: 2000 },
-          { id: "LN002", amount: 10000, status: "Pending", nextPayment: "2025-04-01", paidAmount: 0 },
+          { id: "LN001", amount: 500000, status: "Approved", nextPayment: "2025-04-06", paidAmount: 50000 }
         ]);
         setError(false);
       } catch (err) {
@@ -174,8 +171,8 @@ const BorrowerDashboard = () => {
               <thead>
                 <tr className="bg-blue-200 text-gray-700">
                   <th className="border border-gray-300 p-3">Loan ID</th>
-                  <th className="border border-gray-300 p-3">Amount ($)</th>
-                  <th className="border border-gray-300 p-3">Paid ($)</th>
+                  <th className="border border-gray-300 p-3">Amount (Rs.)</th>
+                  <th className="border border-gray-300 p-3">Paid (Rs.)</th>
                   <th className="border border-gray-300 p-3">Next Payment</th>
                   <th className="border border-gray-300 p-3">Status</th>
                 </tr>
@@ -184,8 +181,8 @@ const BorrowerDashboard = () => {
                 {loanData.map((loan) => (
                   <tr key={loan.id} className="border border-gray-300 hover:bg-gray-100">
                     <td className="border border-gray-300 p-3">{loan.id}</td>
-                    <td className="border border-gray-300 p-3">${loan.amount}</td>
-                    <td className="border border-gray-300 p-3">${loan.paidAmount}</td>
+                    <td className="border border-gray-300 p-3">Rs.{loan.amount}</td>
+                    <td className="border border-gray-300 p-3">Rs.{loan.paidAmount}</td>
                     <td className="border border-gray-300 p-3">{loan.nextPayment || "N/A"}</td>
                     <td className={`border border-gray-300 p-3 font-bold ${loan.status === "Approved" ? "text-green-500" : "text-yellow-500"}`}>{loan.status}</td>
                   </tr>
