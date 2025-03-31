@@ -89,7 +89,7 @@ await axios.post("http://localhost:5001/api/auth/signup", {
       alert("Signup Successful!");
 
       // ✅ Navigate to Dashboard
-      navigate(isLender ? "/lender-dashboard" : "/borrower-dashboard");
+      navigate(isLender ? "/lender-dashboard" : "/loan-application");
 
     } catch (error) {
       console.error("❌ Signup Error:", error);

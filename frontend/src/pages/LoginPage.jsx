@@ -47,7 +47,7 @@ const LoginPage = ({ setUser }) => {
       setUser(userDetails);
 
       // Redirect user based on role
-      navigate(userData.isLender ? "/lender-dashboard" : "/dashboard");
+      navigate(userData.isLender ? "/lender-dashboard" : "/loan-application");
     } catch (error) {
       console.error("❌ Login Error:", error);
       setError(error.message || "Invalid email or password. Please try again.");
