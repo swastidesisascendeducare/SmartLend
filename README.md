@@ -145,28 +145,20 @@ Follow these steps to set up SmartLend locally:
      cd frontend
      npm start  # Runs on http://localhost:3000
      ```
-   - **Backend**
+     - **Mongobackend**
      ```bash
-     cd backend
-     node server.js  # Runs on http://localhost:5000 (adjust port as needed)
+     cd Mongobackend
+     uvicorn mlServer:app --reload # Python backend
+     cd updated_backend
+     node server.js      # Node.js backend
      ```
    - **OCR Backend**
      ```bash
      cd ocr_backend
      node index.js  # Runs on http://localhost:5001 (adjust port)
      ```
-   - **ML Model Server**
-     ```bash
-     cd ML_Model
-     python mlServer.py  # Runs ML service (port TBD)
-     ```
-   - **Mongobackend (if used)**
-     ```bash
-     cd Mongobackend
-     python api/main.py  # Python backend
-     cd updated_backend
-     node server.js      # Node.js backend
-     ```
+   
+   
 
 ---
 
