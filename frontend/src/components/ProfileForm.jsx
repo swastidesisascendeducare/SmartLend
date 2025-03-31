@@ -11,20 +11,6 @@ import LoanPreferencesForm from "./forms/LoanPreferencesForm";
 import BankDetailsForm from "./forms/BankDetailsForm";
 import VerificationForm from "./forms/VerificationForm";
 
-// 🔹 Simulated existing user data (replace with actual API call)
-// const existingUserData = {
-//     name: "John Doe",
-//     email: "john.doe@example.com",
-//     phone: "1234567890",
-//     address: "123 Main St, New York, NY",
-//     profilePicture: "https://via.placeholder.com/150",
-//     idProof: "https://example.com/id-proof.pdf",
-//     financialDetails: {
-//         annualIncome: "$50,000",
-//         creditScore: "750",
-//     },
-// };
-
 const borrowerData = {
     name: "Vidhi Arora",
     email: "aroravidhi342@gmail.com",
@@ -92,7 +78,7 @@ const ProfileForm = ({ userType }) => {
     const [showPreview, setShowPreview] = useState(false);
     const navigate = useNavigate();
 
-    // 🔹 Load existing user data on mount
+    // Load existing user data on mount
     useEffect(() => {
         setFormData(userType === "lender" ? lenderData : borrowerData);
     }, [userType]);    
@@ -175,7 +161,7 @@ const ProfileForm = ({ userType }) => {
                 </div>
             </div>
 
-            {/* 🔹 Modal for Live Preview */}
+            {/* Modal for Live Preview */}
             {showPreview && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                     <div className="bg-white p-6 rounded-lg shadow-lg w-[75%] max-w-3xl">
