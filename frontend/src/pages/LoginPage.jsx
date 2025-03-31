@@ -23,10 +23,10 @@ const LoginPage = ({ setUser }) => {
     try {
       console.log("🚀 Attempting login for:", formData.email);
 
-      // ✅ Firebase Auth
+      // Firebase Auth
       const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
       const user = userCredential.user;
-      console.log("✅ Firebase Auth Success:", user.uid);
+      console.log("Firebase Auth Success:", user.uid);
 
       // Fetch user data from Firestore
       const userDoc = await getDoc(doc(db, "users", user.uid));
@@ -35,7 +35,7 @@ const LoginPage = ({ setUser }) => {
       }
 
       const userData = userDoc.data();
-      console.log("👤 Firestore User Data:", userData);
+      console.log("Firestore User Data:", userData);
 
       if (userData.isLender === undefined) {
         throw new Error("User type not assigned.");
@@ -49,7 +49,7 @@ const LoginPage = ({ setUser }) => {
       // Redirect user based on role
       navigate(userData.isLender ? "/lender-dashboard" : "/loan-application");
     } catch (error) {
-      console.error("❌ Login Error:", error);
+      console.error("Login Error:", error);
       setError(error.message || "Invalid email or password. Please try again.");
     } finally {
       setIsLoading(false);
