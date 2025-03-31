@@ -1,6 +1,6 @@
 const Borrower = require("../models/borrowerModel");
 
-// ✅ Register a new borrower
+// Register a new borrower
 const registerBorrower = async (req, res) => {
   try {
     const newBorrower = new Borrower(req.body);
@@ -11,7 +11,7 @@ const registerBorrower = async (req, res) => {
   }
 };
 
-// ✅ Get a specific borrower by ID
+// Get a specific borrower by ID
 const getBorrower = async (req, res) => {
   try {
     console.log("Fetching borrower with ID:", req.params.id);
@@ -30,7 +30,7 @@ const getBorrower = async (req, res) => {
   }
 };
 
-// ✅ Apply for a loan
+// Apply for a loan
 const applyForLoan = async (req, res) => {
   try {
     const borrower = await Borrower.findById(req.params.id);
@@ -49,7 +49,7 @@ const applyForLoan = async (req, res) => {
   }
 };
 
-// ✅ Get borrower profile
+// Get borrower profile
 const getBorrowerProfile = async (req, res) => {
   try {
     const borrower = await Borrower.findById(req.params.id);
@@ -62,7 +62,7 @@ const getBorrowerProfile = async (req, res) => {
   }
 };
 
-// ✅ Update borrower profile
+// Update borrower profile
 const updateBorrowerProfile = async (req, res) => {
   try {
     const borrower = await Borrower.findByIdAndUpdate(req.params.id, req.body, {
@@ -80,7 +80,7 @@ const updateBorrowerProfile = async (req, res) => {
   }
 };
 
-// ✅ Delete borrower profile
+// Delete borrower profile
 const deleteBorrowerProfile = async (req, res) => {
   try {
     const borrower = await Borrower.findByIdAndDelete(req.params.id);
@@ -93,7 +93,7 @@ const deleteBorrowerProfile = async (req, res) => {
   }
 };
 
-// ✅ Get top borrowers based on loan amount
+// Get top borrowers based on loan amount
 const getTopBorrowers = async (req, res) => {
   try {
     const topBorrowers = await Borrower.find().sort({ loanAmount: -1 }).limit(5);
@@ -103,7 +103,7 @@ const getTopBorrowers = async (req, res) => {
   }
 };
 
-// ✅ Export all controllers correctly
+// Export all controllers correctly
 module.exports = {
   registerBorrower,
   getBorrower,
