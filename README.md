@@ -3,7 +3,7 @@
 
 ![SmartLend Logo](frontend/src/assets/SmartLendLogo5.png)
 
-Welcome to **SmartLend**, a cutting-edge peer-to-peer lending platform designed to connect borrowers and lenders seamlessly. Whether you're seeking a loan to fuel your dreams or looking to invest in opportunities, SmartLend leverages modern technology—machine learning, OCR, and a robust full-stack architecture—to make lending smarter, faster, and more secure.
+Welcome to **SmartLend**, a cutting-edge peer-to-peer lending platform designed to connect borrowers and lenders seamlessly. Whether you're seeking a loan to fuel your dreams or looking to invest in opportunities, SmartLend leverages modern technology—machine learning, and a robust full-stack architecture—to make lending smarter, faster, and more secure.
 
 ---
 
@@ -12,7 +12,6 @@ Welcome to **SmartLend**, a cutting-edge peer-to-peer lending platform designed 
 - **Borrower Empowerment**: Apply for loans with an intuitive dashboard and streamlined application process.
 - **Lender Opportunities**: Fund loans, track investments, and review agreements through a dedicated lender portal.
 - **Smart Evaluation**: Machine learning (XGBoost) powers credit scoring and loan approval decisions.
-- **Document Verification**: OCR technology ensures quick and accurate processing of uploaded documents.
 - **Secure & Transparent**: Firebase-backed authentication and MongoDB for reliable data management.
 - **Real-Time Tracking**: Monitor repayments, transactions, and loan statuses effortlessly.
 
@@ -21,10 +20,10 @@ Welcome to **SmartLend**, a cutting-edge peer-to-peer lending platform designed 
 ## 🛠️ Technologies Used
 
 - **Frontend**: React, Tailwind CSS, Firebase (authentication & config)
-- **Backend**: Node.js, Express.js, MongoDB (via `mongo_client.py`)
+- **Backend**: Node.js, Express.js, MongoDB
 - **Machine Learning**: Python, XGBoost (`xgb_model.pkl`)
 - **OCR Service**: Node.js
-- **Tools**: Git, npm, pip, Vercel (deployment config)
+- **Tools**: Git, npm, pip
 
 ---
 
@@ -33,30 +32,22 @@ Welcome to **SmartLend**, a cutting-edge peer-to-peer lending platform designed 
 ```
 📦 SmartLend
 ├─ .gitignore                # Git ignore rules
-├─ ML_Model                  # Machine Learning service
-│  ├─ mlServer.py           # ML server script
-│  └─ xgb_model.pkl         # Trained XGBoost model
 ├─ Mongobackend              # Mixed Python/Node.js backend (possibly experimental)
-│  ├─ api                   # API endpoints (Python)
-│  ├─ database              # MongoDB integration
+│  ├─ api                   # API endpoint for ML model
+│  ├─ database              # MongoDB integration (mongo_client.py)
 │  ├─ mlServer.py           # ML server (Python)
 │  ├─ ml_models             # ML model storage
 │  ├─ requirements.txt      # Python dependencies
-│  ├─ schemas.py            # Data schemas
-│  ├─ services              # Business logic (e.g., loan evaluation)
+│  ├─ schemas.py            
+│  ├─ services              # Business logic (i.e loan evaluation)
 │  └─ updated_backend       # Node.js backend (updated version?)
 │     ├─ .env              # Environment variables
-│     ├─ config            # Configuration files
+│     ├─ config            
 │     ├─ controllers       # Request handlers
 │     ├─ package.json      # Node.js dependencies
 │     ├─ routes            # API routes
 │     ├─ server.js         # Main server script
 │     └─ xgb_model.pkl     # ML model copy
-├─ backend                   # Primary Node.js backend
-│  ├─ db.js                # Database config
-│  ├─ models               # Data models
-│  ├─ routes               # API routes
-│  └─ server.js            # Main server script
 ├─ frontend                  # React frontend
 │  ├─ public               # Static assets
 │  ├─ src                  # Source code
@@ -66,11 +57,7 @@ Welcome to **SmartLend**, a cutting-edge peer-to-peer lending platform designed 
 │  │  ├─ firebaseConfig.js # Firebase setup
 │  │  └─ [other files]     # App logic, styles, etc.
 │  ├─ package.json         # Dependencies
-│  └─ tailwind.config.js   # Tailwind CSS config
-├─ ocr_backend               # OCR service
-│  ├─ index.js             # Main script
-│  ├─ package.json         # Dependencies
-│  └─ uploads              # Sample uploaded files
+│  └─ tailwind.config.js   # Tailwind CSS config            
 ├─ README.md                # You’re reading it!
 └─ package.json             # Root-level dependencies (if any)
 ```
@@ -83,7 +70,7 @@ Welcome to **SmartLend**, a cutting-edge peer-to-peer lending platform designed 
 Follow these steps to set up SmartLend locally:
 
 ### Prerequisites
-- **Node.js** (v16+ recommended)
+- **Node.js** 
 - **Python** (3.9+ for ML components)
 - **npm** (comes with Node.js)
 - **pip** (Python package manager)
@@ -123,11 +110,6 @@ Follow these steps to set up SmartLend locally:
 
 3. **Configure Environment Variables**
    - Create `.env` files in `backend`, `updated_backend`, and `ocr_backend` with required keys (e.g., `MONGO_URI`, `FIREBASE_API_KEY`, `ML_MODEL_PATH`).
-   - Example for `backend/.env`:
-     ```
-     PORT=5000
-     MONGO_URI=mongodb://localhost:27017/smartlend
-     ```
 
 4. **Run the Services**
    - **Frontend**
@@ -145,42 +127,35 @@ Follow these steps to set up SmartLend locally:
    - **OCR Backend**
      ```bash
      cd ocr_backend
-     node index.js  # Runs on http://localhost:5001 (adjust port)
+     node index.js  
      ```
    
    
 
 ---
 
-## 🎮 Usage
+## Usage
 
 1. **Access the App**: Open `http://localhost:3000` in your browser.
 2. **Sign Up/Login**: Create an account as a borrower or lender.
-3. **Borrowers**: Navigate to the loan application page, upload documents via OCR, and track your application.
+3. **Borrowers**: Navigate to the loan application page, apply for loan and track your application.
 4. **Lenders**: Browse loan listings, fund opportunities, and monitor your portfolio.
-5. **Admin (if applicable)**: Use backend APIs to manage users and loans.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 We’d love your help to make SmartLend even better!
 
 1. Fork the repo.
-2. Create a branch: `git checkout -b feature/amazing-feature`.
-3. Commit your changes: `git commit -m "Add amazing feature"`.
-4. Push to your branch: `git push origin feature/amazing-feature`.
+2. Create a branch: `git checkout -b branch_new`.
+3. Commit your changes: `git commit -m "Add new branch"`.
+4. Push to your branch: `git push origin branch_new`.
 5. Open a Pull Request with a clear description.
 
 ---
 
-## 📜 License
-
-This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
-
----
-
-## 🌐 Connect With Us
+## Connect With Us
 
 - **Email**: smartlend25@gmail.com
 
