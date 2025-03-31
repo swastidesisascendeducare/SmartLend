@@ -73,7 +73,7 @@ const LoanMatchingFunding = () => {
       {/* Fund Button */}
       <button
         className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        onClick={() => navigate("/loan-agreement-review")}>
+        onClick={() => navigate("/loan-agreement")}>
           Fund Loan
       </button>
 

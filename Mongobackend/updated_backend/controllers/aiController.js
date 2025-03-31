@@ -542,9 +542,175 @@
 //   }
 // };
 
+// const { GoogleGenerativeAI } = require("@google/generative-ai");
+// const nodemailer = require("nodemailer");
 
+// const Lender = require("../models/lenderModel");
+// const Borrower = require("../models/borrowerModel");
+// const Loan = require("../models/loanModel");
 
+// const API_KEY = "AIzaSyBIejn1A_MoM1YfiSi-KwCQsgBWt52l4pE";
+// const genAI = new GoogleGenerativeAI(API_KEY);
+// const model = genAI.getGenerativeModel({
+//   model: "gemini-1.5-flash",
+//   config: {
+//     temperature: 0.3,
+//     topP: 0.9,
+//     maxOutputTokens: 2048,
+//     systemInstruction: `
+//       System Instruction:
+//       You are a specialized assistant designed to generate clear and structured loan agreements between lenders and borrowers.  
+//       Your purpose is to help users establish trust and transparency in lending transactions, making it easier for them to accept and proceed with the agreement. This is just for display purposes, so there will not be any involvement of legality.  
+//       Do not use any special formatting like asterisks, bold, or markdown.  
+//       DO NOT USE PREAMBLE.  
 
+//       Response Guidelines:  
+//       1. No disclaimers or legal hesitations—focus on clarity and completeness.  
+//       2. Structured formatting with clear sections and bullet points for easy reading.  
+//       3. Use precise, formal, yet reader-friendly language (avoid overly technical or legal jargon).  
+//       4. Ensure all terms are well-explained to eliminate confusion.  
+//       5. Fill in missing details dynamically (e.g., if no late payment fee is provided, assume a reasonable default).  
+//       6. No additional commentary—only return the agreement text.  
+//       7. Do not use any special formatting like asterisks, bold, or markdown.  
+//       8. DO NOT USE PREAMBLE.  
+//     `
+//   }
+// });
+
+// // Configure Nodemailer transport
+// const transporter = nodemailer.createTransport({
+//   service: "Gmail",
+//   auth: {
+//     user: "smartlend25@gmail.com",
+//     pass: "lhqa omvn rhqb zmyb"
+//   }
+// });
+
+// // Function to send email with signed box
+// const sendEmail = async (email, agreement) => {
+//   const signedBox = `
+//     <div style="border: 1px solid #ccc; padding: 10px; margin-top: 20px; width: 300px;">
+//       <p><strong>Signed by:</strong> Rishabh</p>
+//       <p>Date: ${new Date().toLocaleDateString()}</p>
+//     </div>
+//   `;
+
+//   const mailOptions = {
+//     from: "smartlend25@gmail.com",
+//     to: email,
+//     subject: "Loan Agreement Generated",
+//     html: `
+//       <p>Dear Borrower,</p>
+//       <p>Please find the generated loan agreement below:</p>
+//       <pre style="background-color: #f4f4f4; padding: 10px; border: 1px solid #ddd; white-space: pre-wrap;">${agreement}</pre>
+//       ${signedBox}
+//       <p>Best regards,<br>Your Loan Platform</p>
+//     `
+//   };
+
+//   try {
+//     await transporter.sendMail(mailOptions);
+//     console.log(`✅ Email sent successfully to: ${email}`);
+//   } catch (error) {
+//     console.error("❌ Error sending email:", error);
+//   }
+// };
+
+// exports.getAgreement = async (req, res) => {
+//   console.log("AI route HIT");
+
+//   try {
+//     const loan = await Loan.findById("67df10eef37b05db1ac292e8");
+//     const lender = await Lender.findById("67de9cb6f1728e1e9523bf9d");
+//     const borrower = await Borrower.findById(loan.borrowerId);
+
+//     console.log("Loan Model:", loan);
+//     console.log("Lender Model:", lender);
+//     console.log("Borrower Model:", borrower);
+
+//     const calculatedApr = (loan.interestRate * 1.2).toFixed(2);
+//     const calculatedInstallment = (
+//       (loan.amountRequested * (loan.interestRate / 100)) /
+//       loan.loanTerm
+//     ).toFixed(2);
+//     const calculatedFirstPaymentDate = new Date().toISOString().split("T")[0];
+//     const calculatedLateFee = (loan.amountRequested * 0.02).toFixed(2);
+//     const repayment = {
+//       dueDate: loan.dueDate || "1st",
+//       lateDays: loan.lateDays || 7
+//     };
+
+//     const prompt = `
+//       Generate a Loan Agreement Document
+
+//       Create a Loan Agreement between a lender and a borrower to ensure transparency and trust in lending. The document should clearly outline the agreed terms, presented in a format suitable for front-end display. The agreement should appear as a complete and structured document, but it is for informational and display purposes only and will not be signed or legally enforced.
+
+//       Loan Agreement
+//       This Loan Agreement is made as of ${new Date().toLocaleDateString()}, between:
+
+//       Lender: ${lender.name}, ${lender.address} (the "Lender")
+
+//       Borrower: ${borrower.name}, ${borrower.address} (the "Borrower")
+
+//       1. Loan Details
+//       Loan Amount: ₹${loan.amountRequested}
+
+//       Loan Purpose: ${borrower.loanPurpose}
+
+//       Interest Rate: ${loan.interestRate}% per annum, resulting in an APR of ${calculatedApr}%
+
+//       Loan Term: ${loan.loanTerm} months (${(loan.loanTerm / 12).toFixed(1)} years)
+
+//       Commencement Date: ${calculatedFirstPaymentDate}
+
+//       2. Repayment Terms
+//       Monthly Payment: ₹${calculatedInstallment}, due on the ${repayment.dueDate} of each month, starting from ${calculatedFirstPaymentDate}.
+
+//       Payment Method:
+//       - If bank account details are available: Bank Transfer (Acc: ${borrower.bankDetails?.accountNumber || "N/A"})
+//       - Otherwise: UPI
+
+//       Prepayment Terms: Borrower may prepay the loan in full or in part at any time without penalty.
+
+//       3. Interest Calculation
+//       Interest will be calculated monthly on the outstanding principal balance.
+
+//       4. Late Payment and Default
+//       Late Payment Penalty: A penalty of ₹${calculatedLateFee} will apply if payment is delayed by more than ${repayment.lateDays} days.
+
+//       Default Terms: Failure to make timely payments may result in acceleration of the loan and legal action to recover the outstanding balance. Events of default include:
+//       - Non-payment
+//       - Breach of agreement terms
+//       - Insolvency
+
+//       5. Governing Law
+//       This agreement shall be governed by the laws of India. Any disputes shall be resolved under the jurisdiction of [specify jurisdiction].
+
+//       6. Entire Agreement
+//       This document constitutes the entire agreement between the parties for display purposes only and does not require signatures.
+
+//       Signatures (Display Only, Not Legally Binding)
+//       Lender: ${lender.name}
+//       Borrower: ${borrower.name}
+//       Signed by: Rishabh
+//     `;
+
+//     const chatCompletion = await model.generateContent(prompt);
+//     const generatedAgreement =
+//       chatCompletion.response.candidates[0].content.parts[0].text;
+
+//     console.log("✅ Agreement Generated Successfully");
+
+//     // Send email to borrower or fallback to default email
+//     const recipientEmail = borrower?.email || "aroravidhi342@gmail.com";
+//     await sendEmail(recipientEmail, generatedAgreement);
+
+//     res.status(200).json({ generatedAgreement: generatedAgreement });
+//   } catch (error) {
+//     console.error("❌ Error generating agreement: ", error);
+//     res.status(500).json({ error: "Chat error occurred" });
+//   }
+// };
 
 
 const { GoogleGenerativeAI } = require("@google/generative-ai");
@@ -604,7 +770,7 @@ const sendEmail = async (email, agreement) => {
     from: "smartlend25@gmail.com",
     to: email,
     subject: "Loan Agreement Generated",
-    html: `
+    text: `
       <p>Dear Borrower,</p>
       <p>Please find the generated loan agreement below:</p>
       <pre style="background-color: #f4f4f4; padding: 10px; border: 1px solid #ddd; white-space: pre-wrap;">${agreement}</pre>
@@ -625,7 +791,7 @@ exports.getAgreement = async (req, res) => {
   console.log("AI route HIT");
 
   try {
-    const loan = await Loan.findById("67df10eef37b05db1ac292e8");
+    const loan = await Loan.findById("67df08f7221149e1e28adcac");
     const lender = await Lender.findById("67de9cb6f1728e1e9523bf9d");
     const borrower = await Borrower.findById(loan.borrowerId);
 
@@ -716,3 +882,4 @@ exports.getAgreement = async (req, res) => {
     res.status(500).json({ error: "Chat error occurred" });
   }
 };
+
