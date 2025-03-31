@@ -336,7 +336,6 @@ const App = () => {
                 <Route path="/repayment-tracking" element={<RepaymentTrackingPage />} />
                 <Route path="/borrower-profile" element={<BorrowerProfile />} />
                 <Route path="/borrower-profile/edit" element={<BorrowerEditProfile />} />
-                <Route path="/ocr-upload" element={<OCR />} />
               </>
             )}
 
@@ -365,7 +364,7 @@ const App = () => {
             {/* Redirects */}
             <Route
               path="*"
-              element={<Navigate to={user ? (user.role === "lender" ? "/lender-dashboard" : "/dashboard") : "/"} />}
+              element={<Navigate to={user ? (user.role === "lender" ? "/lender-dashboard" : "/loan-application") : "/"} />}
             />
           </Routes>
         </div>
