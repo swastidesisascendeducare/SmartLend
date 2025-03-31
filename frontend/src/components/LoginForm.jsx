@@ -12,17 +12,17 @@ const LoginPage = ({ setUser }) => {
     setError("");
 
     try {
-      console.log("🚀 Logging in with:", formData);
+      console.log("Logging in with:", formData);
       const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
       const user = userCredential.user;
-      console.log("✅ Login Successful:", user);
+      console.log("Login Successful:", user);
 
       // Get user role from Firestore
       const userDoc = await getDoc(doc(db, "users", user.uid));
 
       if (userDoc.exists()) {
         const userData = userDoc.data();
-        console.log("👤 User Data:", userData);
+        console.log("User Data:", userData);
 
         // Set user state
         setUser({ ...user, role: userData.role });
