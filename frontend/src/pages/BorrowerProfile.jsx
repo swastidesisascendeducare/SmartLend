@@ -3,7 +3,7 @@ import BorrowerLayout from "../components/BorrowerLayout";
 
 const BorrowerProfile = () => {
     const borrowerData = {
-        profilePicture: "https://via.placeholder.com/150",  // Replace with actual profile image URL
+        profilePicture: "https://via.placeholder.com/150",
         name: "Jane Smith",
         email: "jane@example.com",
         phone: "+91 8765432190",
@@ -28,54 +28,3 @@ const BorrowerProfile = () => {
 };
 
 export default BorrowerProfile;
-
-
-
-//////////////////INTEGRATION ONE//////////////GIVING ERROR////////////////////////////////
-
-
-// import { useEffect, useState } from 'react';
-// import BorrowerDisplayProfile from '../components/profile/BorrowerDisplayProfile';
-// import BorrowerLayout from '../components/BorrowerLayout';
-// import axios from 'axios';
-
-// const BorrowerProfile = ({ userId }) => {
-//   const [borrowerData, setBorrowerData] = useState(null);
-//   const [isLoading, setIsLoading] = useState(true);
-
-//   useEffect(() => {
-//     const fetchBorrowerData = async () => {
-//       if (!userId) {
-//         console.error('🚨 No user ID found in BorrowerProfile');
-//         setIsLoading(false);
-//         return;
-//       }
-
-//       try {
-//         console.log(`🔍 Fetching data for userId: ${userId}`);
-//         const response = await axios.get(`/api/borrower/${userId}`);
-//         setBorrowerData(response.data);
-//       } catch (error) {
-//         console.error('❌ Failed to fetch borrower data:', error);
-//       } finally {
-//         setIsLoading(false);
-//       }
-//     };
-
-//     fetchBorrowerData();
-//   }, [userId]);
-
-//   return (
-//     <BorrowerLayout>
-//       {isLoading ? (
-//         <div>Loading profile...</div>
-//       ) : borrowerData ? (
-//         <BorrowerDisplayProfile borrowerData={borrowerData} isLoading={false} userType="borrower" />
-//       ) : (
-//         <div>No borrower data found.</div>
-//       )}
-//     </BorrowerLayout>
-//   );
-// };
-
-// export default BorrowerProfile;
