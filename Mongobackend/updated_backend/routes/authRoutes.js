@@ -9,7 +9,7 @@ const cors = require('cors');
 
 router.use(cors());
 
-router.post('/signup', verifyToken, signup); // ✅ Token will be verified here
+router.post('/signup', verifyToken, signup); // Token will be verified here
 router.post('/login', login);
 
 module.exports = router;
