@@ -1,13 +1,6 @@
 import React, { useState,useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-// const loanRequests = [
-//   { id: 1, name: "Amit Sharma", amount: 50000, interest: 12, duration: "12 months", risk: "Low", funded: 30 },
-//   { id: 2, name: "Priya Mehta", amount: 200000, interest: 15, duration: "24 months", risk: "High", funded: 60 },
-//   { id: 3, name: "Rahul Verma", amount: 100000, interest: 10, duration: "18 months", risk: "Medium", funded: 45 },
-//   { id: 4, name: "Neha Gupta", amount: 75000, interest: 13, duration: "15 months", risk: "Low", funded: 80 },
-// ];
-
 
 const LoanMatchingFunding = () => {
   const navigate = useNavigate();
@@ -35,21 +28,6 @@ const LoanMatchingFunding = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">Loan Matching & Funding</h1>
-      
-      {/* Filter Options
-      <div className="mb-4">
-        <label className="mr-2 font-semibold">Filter by Risk Level:</label>
-        <select
-          className="border p-2 rounded"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        >
-          <option value="All">All</option>
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">High</option>
-        </select>
-      </div> */}
 
       {/* Loan Requests */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -60,9 +38,6 @@ const LoanMatchingFunding = () => {
       <p className="text-gray-600">Loan Amount: ₹{loan.loanAmount}</p>
       <p className="text-gray-600">Interest Rate: {loan.interestRate}%</p>
       <p className="text-gray-600">Duration: {loan.loanTerm}</p>
-      {/* <p className={`font-semibold ${loan.risk === "High" ? "text-red-500" : loan.risk === "Medium" ? "text-orange-500" : "text-green-500"}`}>
-        Risk Level: {loan.risk}
-      </p> */}
 
       {/* Fund Button */}
       <button
