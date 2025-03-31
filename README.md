@@ -104,10 +104,11 @@ Follow these steps to set up SmartLend locally:
      cd frontend
      npm install
      ```
-
-   - **Backend (Primary)**
+      - **Mongobackend **
      ```bash
-     cd backend
+     cd Mongobackend
+     pip install -r requirements.txt
+     cd updated_backend
      npm install
      ```
 
@@ -117,19 +118,8 @@ Follow these steps to set up SmartLend locally:
      npm install
      ```
 
-   - **ML Model Server**
-     ```bash
-     cd ML_Model
-     pip install -r ../Mongobackend/requirements.txt  # Assuming shared requirements
-     ```
 
-   - **Mongobackend (Optional, if active)**
-     ```bash
-     cd Mongobackend
-     pip install -r requirements.txt
-     cd updated_backend
-     npm install
-     ```
+  
 
 3. **Configure Environment Variables**
    - Create `.env` files in `backend`, `updated_backend`, and `ocr_backend` with required keys (e.g., `MONGO_URI`, `FIREBASE_API_KEY`, `ML_MODEL_PATH`).
