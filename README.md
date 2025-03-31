@@ -182,7 +182,7 @@ This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for d
 
 ## 🌐 Connect With Us
 
-- **Email**: support@smartlend.example.com
+- **Email**: smartlend25@gmail.com
 
 Built with 💻 and ❤️ by the SmartLend Team.
 ```
