@@ -4,7 +4,7 @@ const Borrower = require("../models/borrowerModel");
 const Lender = require("../models/lenderModel");
 const nodemailer = require("nodemailer");
 
-// ✅ SMTP Mail Setup using nodemailer and app password
+// SMTP Mail Setup using nodemailer and app password
 const transporter = nodemailer.createTransport({
   service: "Gmail",
   auth: {
@@ -40,7 +40,7 @@ exports.getLoanDetails = async (req, res) => {
 
 
 
-// ✅ Request Loan Route
+// Request Loan Route
 exports.requestLoan = async (req, res) => {
   try {
     const { borrowerId, amountRequested, interestRate, loanTerm, approvedByML } = req.body;
@@ -67,8 +67,8 @@ exports.requestLoan = async (req, res) => {
 
     await newLoan.save();
 
-    // ✅ Send email notification to borrower
-    // ✅ Dark Blue & Subtle Purple HTML Mail
+    // Send email notification to borrower
+    // Dark Blue & Subtle Purple HTML Mail
 const mailOptions = {
   from: process.env.EMAIL_USER || "smartlend25@gmail.com",
   to: borrower.email, // Safeguard for undefined email
@@ -117,7 +117,7 @@ const mailOptions = {
   }
 };
 
-// ✅ Get Loan Matches
+// Get Loan Matches
 exports.getLoanMatches = async (req, res) => {
   try {
     const { borrowerId } = req.params;
@@ -140,7 +140,7 @@ exports.getLoanMatches = async (req, res) => {
   }
 };
 
-// ✅ Get Best Collaborative Funding
+// Get Best Collaborative Funding
 exports.getBestCollaborativeFunding = async (req, res) => {
   try {
     const bestLoans = await Loan.find({ status: "Pending" }).sort({ interestRate: 1 }).limit(5);
@@ -151,7 +151,7 @@ exports.getBestCollaborativeFunding = async (req, res) => {
   }
 };
 
-// ✅ Fund a Loan by a Lender
+// Fund a Loan by a Lender
 exports.fundLoan = async (req, res) => {
   try {
     const { loanId, lenderId, amount, interestRate } = req.body;
