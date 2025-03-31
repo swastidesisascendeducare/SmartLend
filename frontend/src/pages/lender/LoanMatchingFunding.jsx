@@ -64,16 +64,10 @@ const LoanMatchingFunding = () => {
         Risk Level: {loan.risk}
       </p> */}
 
-      {/* Funding Progress Bar */}
-      <div className="mt-4 bg-gray-200 h-4 rounded-full overflow-hidden">
-        <div className="bg-blue-500 h-full" style={{ width: `${loan.funded}%` }}></div>
-      </div>
-      <p className="text-sm mt-1">{loan.funded}% funded</p>
-
       {/* Fund Button */}
       <button
         className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        onClick={() => navigate("/loan-agreement-review")}>
+        onClick={() => navigate("/loan-agreement")}>
           Fund Loan
       </button>
 

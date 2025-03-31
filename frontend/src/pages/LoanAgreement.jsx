@@ -160,20 +160,33 @@ import BorrowerLayout from "../components/BorrowerLayout";
 import axios from 'axios';
 
 const LoanAgreementPage = () => {
+    const [loading, setLoading] = useState(false);
+    const [showModal, setShowModal] = useState(true);
+    const [selectedConditions, setSelectedConditions] = useState({ flexibleRepayment: false, earlyPayment: false, penalty: true });
     const [agreed, setAgreed] = useState(false);
     const [signature, setSignature] = useState("");
     const [isSigned, setIsSigned] = useState(false);
     const [agreement, setAgreement] = useState('');
     const [fetchError, setFetchError] = useState(null);
     const hasFetched = useRef(false);
+    const [loan, setLoan] = useState(null);
+    const [lender, setLender] = useState(null);
+    const [borrower, setBorrower] = useState(null);
 
     const sendUserRole = useCallback(async () => {
         if (hasFetched.current) return;
         hasFetched.current = true;
+        setLoading(true); 
 
         try {
             console.log("Fetching the agreement...");
-            const response = await axios.post("http://localhost:5001/api/ai/agreement");
+            const response = await axios.post("http://localhost:5001/api/ai/agreement", {
+              conditions: selectedConditions, 
+            });
+            setAgreement(response.data.generatedAgreement);
+            setLoan(response.data.loan);
+            setLender(response.data.lender);
+            setBorrower(response.data.borrower);
             let agreementString = response.data.generatedAgreement;
 
             // 1. Remove surrounding backticks and "json" and surrounding curly braces
@@ -193,12 +206,14 @@ const LoanAgreementPage = () => {
         } catch (error) {
             console.error("Error:", error);
             setFetchError("Failed to load the loan agreement. Please try again.");
-        }
-    }, []);
+        } finally {
+          setLoading(false);  // Hide loading modal
+      }
+    }, [selectedConditions]);
 
     useEffect(() => {
-        sendUserRole();
-    }, [sendUserRole]);
+      if (!showModal) sendUserRole();
+    }, [showModal, sendUserRole]);
 
     const handleSignAgreement = () => {
         if (!agreed) {
@@ -227,18 +242,18 @@ const LoanAgreementPage = () => {
 
     const handleDownload = () => {
         const element = document.createElement("a");
-        const fileContent = `
-            Loan Agreement Details
-            ----------------------
-            Loan Amount: $10,000
-            Interest Rate: 5% per annum
-            Term: 24 months
-            Monthly Payment: $440
-            ----------------------
-            Agreement:
-            ${agreement}
-            ----------------------
-            Agreement Signed By: ${signature}
+        const fileContent = `  
+        Loan Agreement Details  
+        ----------------------  
+        Loan Amount: ₹${loan?.amountRequested || "N/A"}  
+        Interest Rate: ${loan?.interestRate || "N/A"}% per annum  
+        Term: ${loan?.loanTerm || "N/A"} months (${(loan?.loanTerm / 12)?.toFixed(1) || "N/A"} years)  
+        Monthly Payment: ₹${((loan?.amountRequested * (loan?.interestRate / 100)) / loan?.loanTerm)?.toFixed(2) || "N/A"}  
+        ----------------------  
+        Agreement:  
+        ${agreement}  
+        ----------------------  
+        Agreement Signed By: ${signature || "Not Signed"}  
         `;
         const file = new Blob([fileContent], { type: "text/plain" });
         element.href = URL.createObjectURL(file);
@@ -249,6 +264,85 @@ const LoanAgreementPage = () => {
 
   return (
     <BorrowerLayout>
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+            <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+                <h2 className="text-xl font-semibold mb-4">Lender Conditions</h2>
+                <p className="text-gray-700 mb-3">Select any additional conditions for the agreement.</p>
+
+                <label className="flex items-center mb-2">
+                    <input type="checkbox" checked={selectedConditions.flexibleRepayment} 
+                        onChange={() => setSelectedConditions({ ...selectedConditions, flexibleRepayment: !selectedConditions.flexibleRepayment })} 
+                        className="mr-2" />
+                    Flexible Repayment Option
+                </label>
+
+                <label className="flex flex-col mb-2">
+                    <div className="flex items-center">
+                        <input type="checkbox" checked={selectedConditions.earlyPayment} 
+                            onChange={() => setSelectedConditions({ ...selectedConditions, earlyPayment: !selectedConditions.earlyPayment })} 
+                            className="mr-2" />
+                        Allow Early Loan Payment
+                    </div>
+                    {selectedConditions.earlyPayment && (
+                        <input type="number" min="1" max="100" 
+                            value={selectedConditions.earlyPaymentDays || ''} 
+                            onChange={(e) => setSelectedConditions({ ...selectedConditions, earlyPaymentDays: e.target.value })} 
+                            placeholder="Enter days before due date" 
+                            className="border rounded p-2 mt-2 text-sm w-full" />
+                    )}
+                </label>
+
+                <label className="flex flex-col mb-2">
+                    <div className="flex items-center">
+                        <input type="checkbox" checked={selectedConditions.penalty} 
+                            onChange={() => setSelectedConditions({ ...selectedConditions, penalty: !selectedConditions.penalty })} 
+                            className="mr-2" />
+                        Late Payment Penalty
+                    </div>
+                    {selectedConditions.penalty && (
+                        <input type="number" min="0" max="5" step="0.1" 
+                            value={selectedConditions.penaltyPercent || ''} 
+                            onChange={(e) => setSelectedConditions({ ...selectedConditions, penaltyPercent: e.target.value })} 
+                            placeholder="Penalty % (e.g., 2.5%)" 
+                            className="border rounded p-2 mt-2 text-sm w-full" />
+                    )}
+                </label>
+
+                <label className="flex flex-col mb-2">
+                    <div className="flex items-center">
+                        <input type="checkbox" checked={selectedConditions.autoDebit} 
+                            onChange={() => setSelectedConditions({ ...selectedConditions, autoDebit: !selectedConditions.autoDebit })} 
+                            className="mr-2" />
+                        Auto-Debit for Repayments
+                    </div>
+                    {selectedConditions.autoDebit && (
+                        <select value={selectedConditions.autoDebitFrequency || ''} 
+                            onChange={(e) => setSelectedConditions({ ...selectedConditions, autoDebitFrequency: e.target.value })} 
+                            className="border rounded p-2 mt-2 text-sm w-full">
+                            <option value="" disabled>Select frequency</option>
+                            <option value="monthly">Monthly</option>
+                            <option value="bi-weekly">Bi-Weekly</option>
+                            <option value="weekly">Weekly</option>
+                        </select>
+                    )}
+                </label>
+
+                <button className="bg-blue-600 text-white px-4 py-2 rounded-lg mt-4" 
+                    onClick={() => setShowModal(false)}>
+                    Confirm
+                </button>
+            </div>
+        </div>
+    )}
+    {loading && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-blur-sm z-50">
+            <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
+                <p className="text-gray-700 mt-3">Fetching details and preparing your agreement...</p>
+            </div>
+        </div>
+    )}
       <div className="max-w-2xl mx-auto p-8 bg-gray-100 min-h-screen shadow-lg rounded-lg">
         <h1 className="text-3xl font-bold mb-6 text-center text-blue-700">
           Loan Agreement
@@ -264,18 +358,19 @@ const LoanAgreementPage = () => {
             Loan Agreement Details
           </h2>
           <p>
-            <strong>Loan Amount:</strong> $10,000
+            <strong>Loan Amount:</strong> ₹{loan?.amountRequested || "N/A"}
           </p>
           <p>
-            <strong>Interest Rate:</strong> 5% per annum
+            <strong>Interest Rate:</strong> {loan?.interestRate || "N/A"}% per annum
           </p>
           <p>
-            <strong>Term:</strong> 24 months
+            <strong>Term:</strong> {loan?.loanTerm || "N/A"} months ({(loan?.loanTerm / 12)?.toFixed(1) || "N/A"} years)
           </p>
           <p>
-            <strong>Monthly Payment:</strong> $440
+            <strong>Monthly Payment:</strong> ₹{((loan?.amountRequested * (loan?.interestRate / 100)) / loan?.loanTerm)?.toFixed(2) || "N/A"}
           </p>
         </div>
+
 
         {/* Agreement Terms */}
         <div className="mt-6 border p-6 rounded-lg shadow-md bg-white">

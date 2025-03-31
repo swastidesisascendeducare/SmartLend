@@ -628,6 +628,16 @@ exports.getAgreement = async (req, res) => {
     const loan = await Loan.findById("67df10eef37b05db1ac292e8");
     const lender = await Lender.findById("67de9cb6f1728e1e9523bf9d");
     const borrower = await Borrower.findById(loan.borrowerId);
+    const { conditions } = req.body;
+    const selectedConditions = conditions || {
+      flexibleRepayment: false,
+      earlyPayment: false,
+      earlyPaymentDays: '',
+      penalty: false,
+      penaltyPercent: '',
+      autoDebit: false,
+      autoDebitFrequency: ''
+  };
 
     console.log("Loan Model:", loan);
     console.log("Lender Model:", lender);
@@ -639,11 +649,22 @@ exports.getAgreement = async (req, res) => {
       loan.loanTerm
     ).toFixed(2);
     const calculatedFirstPaymentDate = new Date().toISOString().split("T")[0];
-    const calculatedLateFee = (loan.amountRequested * 0.02).toFixed(2);
+    const calculatedLateFee = (loan.amountRequested * ((selectedConditions.penaltyPercent)/100 || 0.02)).toFixed(2);
     const repayment = {
       dueDate: loan.dueDate || "1st",
       lateDays: loan.lateDays || 7
     };
+    let additionalTerms = "";
+
+    if (selectedConditions.flexibleRepayment) {
+      additionalTerms += "\n- Borrower can adjust repayment schedule with prior notice.";
+    }
+    if (selectedConditions.earlyPayment) {
+      additionalTerms += `\n- Borrower is allowed to make early payments after ${selectedConditions.earlyPaymentDays || "a set period"}.`;
+    }
+    if (selectedConditions.autoDebit) {
+      additionalTerms += `\n- Auto-debit is enabled with ${selectedConditions.autoDebitFrequency || "monthly"} deductions.`;
+    }
 
     const prompt = `
       Generate a Loan Agreement Document
@@ -694,6 +715,8 @@ exports.getAgreement = async (req, res) => {
       6. Entire Agreement
       This document constitutes the entire agreement between the parties for display purposes only and does not require signatures.
 
+      7. Additional Terms (As Agreed by Lender & Borrower) ${additionalTerms || "No additional conditions were specified."}
+
       Signatures (Display Only, Not Legally Binding)
       Lender: ${lender.name}
       Borrower: ${borrower.name}
@@ -710,7 +733,9 @@ exports.getAgreement = async (req, res) => {
     const recipientEmail = borrower?.email || "aroravidhi342@gmail.com";
     await sendEmail(recipientEmail, generatedAgreement);
 
-    res.status(200).json({ generatedAgreement: generatedAgreement });
+    res.status(200).json({ generatedAgreement: generatedAgreement, loan, 
+      lender, 
+      borrower });
   } catch (error) {
     console.error("❌ Error generating agreement: ", error);
     res.status(500).json({ error: "Chat error occurred" });
