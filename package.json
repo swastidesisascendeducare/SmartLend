@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "razorpay": "^2.9.6"
+    "razorpay": "^2.9.6",
+    "rc-slider": "^11.1.8",
+    "react-tabs": "^6.1.0",
+    "react-toastify": "^11.0.5"
   }
 }
