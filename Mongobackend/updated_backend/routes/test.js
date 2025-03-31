@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const admin = require('../config/firebase'); // ✅ Ensure Firebase is imported correctly
+const admin = require('../config/firebase'); // Ensure Firebase is imported correctly
 
 // Test Firebase connection
 router.get('/test-firebase', async (req, res) => {
