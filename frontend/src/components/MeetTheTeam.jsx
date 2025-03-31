@@ -1,15 +1,10 @@
 import React from "react";
-// import groupPhoto from "../assets/group-photo.jpg"; // Add your group photo
-// import swasti from "../assets/swasti.jpg";
-// import sharvani from "../assets/sharvani.jpg";
-// import trupti from "../assets/trupti.jpg";
-// import vidhi from "../assets/vidhi.jpg";
-import swasti from "../assets/gradient.png";
-import sharvani from "../assets/gradient.png";
-import trupti from "../assets/gradient.png";
-import vidhi from "../assets/gradient.png";
-import groupPhoto from "../assets/gradient.png";
-import shashank from "../assets/gradient.png";
+import swasti from "../assets/Swasti.jpg";
+import sharvani from "../assets/Sharvani.jpg";
+import trupti from "../assets/Trupti.jpg";
+import vidhi from "../assets/Vidhi.jpg";
+import groupPhoto from "../assets/Group.jpg";
+import shashank from "../assets/Shashank.jpg";
 
 const mentor = {
   name: "Shashank Sharma",
