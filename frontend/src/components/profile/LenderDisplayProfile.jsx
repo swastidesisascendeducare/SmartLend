@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-// Sample Lender Data
 const lenderData = {
   name: "Rishabh Dixit",
   email: "Rishabh@gmail.com",
@@ -42,7 +41,7 @@ const LenderDisplayProfile = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#435FEF] to-[#2E4ABF] text-white">
       <div className="max-w-7xl mx-auto bg-white rounded-lg shadow-lg p-8 relative text-gray-800">
-        {/* 🔹 Greeting Section */}
+        {/* Greeting Section */}
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-4xl font-bold">Hello Rishabh</h1>
@@ -57,7 +56,7 @@ const LenderDisplayProfile = () => {
             </Link>
           </div>
 
-          {/* 🔹 Profile Picture */}
+          {/* Profile Picture */}
           <div className="flex flex-col items-center">
             <img
               src={lenderData.profilePicture}
@@ -67,14 +66,14 @@ const LenderDisplayProfile = () => {
           </div>
         </div>
 
-        {/* 🔹 Stats Section */}
+        {/* Stats Section */}
         <div className="flex justify-center gap-6 mb-8">
           <StatCard label="Available Funds" value={lenderData.availableFunds} />
           <StatCard label="Max Loan Amount" value={lenderData.maxLoanAmount} />
           <StatCard label="Max Loan Term" value={lenderData.maxLoanTerm} />
         </div>
 
-        {/* 🔹 Details Section (Clickable Cards) */}
+        {/* Details Section (Clickable Cards) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <PersonalDetails lenderData={lenderData} onClick={() => setActiveModal("personal")} />
           <InvestmentDetails lenderData={lenderData} onClick={() => setActiveModal("investment")} />
@@ -83,7 +82,7 @@ const LenderDisplayProfile = () => {
           <Security onClick={() => setActiveModal("security")} />
         </div>
 
-        {/* 🔹 Modal for Detailed Sections */}
+        {/* Modal for Detailed Sections */}
         {activeModal && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
             <div className="bg-white p-6 rounded-lg shadow-lg w-1/3 relative">
@@ -103,7 +102,7 @@ const LenderDisplayProfile = () => {
   );
 };
 
-// ✅ Reusable Stat Card Component
+// Reusable Stat Card Component
 const StatCard = ({ label, value }) => (
   <div className="bg-yellow-100 p-4 rounded-lg shadow-md text-center">
     <h3 className="text-xl font-bold text-gray-600">{value}</h3>
@@ -111,7 +110,7 @@ const StatCard = ({ label, value }) => (
   </div>
 );
 
-// ✅ Section Components (Now Clickable)
+// Section Components
 const PersonalDetails = ({ lenderData, onClick }) => (
   <Card title="Personal Information" onClick={onClick}>
     <ProfileItem label="Name" value={lenderData.name} />
@@ -158,7 +157,7 @@ const Security = ({ onClick }) => (
   </Card>
 );
 
-// ✅ Reusable Card Component (Now Clickable)
+// Reusable Card Component
 const Card = ({ title, children, onClick }) => (
   <motion.div
     initial={{ scale: 1 }}
@@ -172,7 +171,6 @@ const Card = ({ title, children, onClick }) => (
   </motion.div>
 );
 
-// ✅ Define Sections
 const sections = [
   { id: "personal", title: "Personal Info", content: <PersonalDetails lenderData={lenderData} /> },
   { id: "investment", title: "Investment Preferences", content: <InvestmentDetails lenderData={lenderData} /> },
@@ -180,5 +178,4 @@ const sections = [
   { id: "documents", title: "Documents", content: <Documents lenderData={lenderData} /> },
 ];
 
-// ✅ Correct Export
 export default LenderDisplayProfile;
