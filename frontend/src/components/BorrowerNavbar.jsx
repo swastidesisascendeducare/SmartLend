@@ -174,10 +174,9 @@ const navLinks = [
   { path: "/loan-status", label: "Loan Status" },
   { path: "/loan-search-page", label: "Loan Search" },
   { path: "/repayment-tracking", label: "Repayment Tracking" },
-  { path: "/ocr-upload", label: "Upload Documents" },
 ];
 
-const BorrowerNavbar = ({ onLogout }) => {
+const BorrowerNavbar = ({onLogout}) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 

@@ -9,7 +9,6 @@ const navLinks = [
   { path: "/loan-matching-funding", label: "Loan Matching" },
   { path: "/collaborative-loan-funding", label: "Collaborative Funding" },
   { path: "/investment-portfolio", label: "Investment Portfolio" },
-  { path: "/loan-agreement-review", label: "Agreement Review" },
 ];
 
 const LenderNavbar = ({ onLogout }) => {

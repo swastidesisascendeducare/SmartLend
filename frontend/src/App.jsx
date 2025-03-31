@@ -315,7 +315,7 @@ const App = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex-grow pt-16">
+        <div className="flex-grow mt-16">
           <Routes>
             {/* Public Routes */}
             <Route path="/" element={<LandingPage />} />
@@ -365,7 +365,7 @@ const App = () => {
             {/* Redirects */}
             <Route
               path="*"
-              element={<Navigate to={user ? (user.role === "lender" ? "/lender-dashboard" : "/dashboard") : "/loginpage"} />}
+              element={<Navigate to={user ? (user.role === "lender" ? "/lender-dashboard" : "/dashboard") : "/"} />}
             />
           </Routes>
         </div>
