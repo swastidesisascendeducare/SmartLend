@@ -2,7 +2,7 @@ import LenderDisplayProfile from "../components/profile/LenderDisplayProfile";
 
 const LenderProfile = () => {
     const lenderData = {
-        profilePicture: "https://via.placeholder.com/150",  // Replace with actual profile image URL
+        profilePicture: "https://via.placeholder.com/150",
         name: "John Doe",
         email: "john@example.com",
         phone: "+91 9876543210",
