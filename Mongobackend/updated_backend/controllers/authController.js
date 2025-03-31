@@ -6,12 +6,12 @@ const signup = async (req, res) => {
     try {
         const { uid, fullName, email, phoneNumber, isLender, loanAmount, lenderType } = req.body;
 
-        // ✅ Validation: Ensure required fields are provided
+        // Validation: Ensure required fields are provided
         if (!fullName || !email || !phoneNumber) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
-        // ✅ Check if user already exists in the correct collection
+        // Check if user already exists in the correct collection
         const existingUser = isLender
             ? await Lender.findOne({ email })
             : await Borrower.findOne({ email });
@@ -21,7 +21,7 @@ const signup = async (req, res) => {
         }
 
         if (isLender) {
-            // ✅ Create new Lender record
+            // Create new Lender record
             const newLender = new Lender({
                 name: fullName,
                 email,
@@ -33,10 +33,10 @@ const signup = async (req, res) => {
             });
 
             await newLender.save();
-            console.log('✅ Lender Profile Created:', newLender);
+            console.log('Lender Profile Created:', newLender);
 
         } else {
-            // ✅ Create new Borrower record
+            // Create new Borrower record
             const newBorrower = new Borrower({
                 name: fullName,
                 email,
@@ -55,13 +55,13 @@ const signup = async (req, res) => {
             });
 
             await newBorrower.save();
-            console.log('✅ Borrower Profile Created:', newBorrower);
+            console.log('Borrower Profile Created:', newBorrower);
         }
 
         res.status(201).json({ message: 'Signup successful' });
         
     } catch (error) {
-        console.error('❌ Error during signup:', error.message);
+        console.error('Error during signup:', error.message);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
@@ -70,13 +70,13 @@ const login = async (req, res) => {
     try {
       const { token } = req.body; // Firebase token from frontend
   
-      // ✅ Verify Firebase token
+      // Verify Firebase token
       const decodedToken = await admin.auth().verifyIdToken(token);
       const { uid, email } = decodedToken;
   
-      console.log("✅ Firebase Token Verified:", decodedToken);
+      console.log("Firebase Token Verified:", decodedToken);
   
-      // ✅ Check if user exists in MongoDB
+      // Check if user exists in MongoDB
       const lender = await Lender.findOne({ email });
       const borrower = await Borrower.findOne({ email });
   
@@ -95,7 +95,7 @@ const login = async (req, res) => {
   
       console.log("👤 User Found in MongoDB:", user);
   
-      // ✅ Return user data
+      // Return user data
       res.status(200).json({
         uid,
         email,
