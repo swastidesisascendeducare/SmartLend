@@ -24,10 +24,10 @@ mongoose.connect(process.env.MONGODB_URI, {
 }).then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.error('MongoDB connection error:', err));
 
-// ✅ Import Models
+// Import Models
 const Loan = require("./models/loanModel"); // Fix for "Loan is not defined"
 
-// ✅ Import Routes
+// Import Routes
 const borrowerRoutes = require('./routes/borrowerRoutes');
 const lenderRoutes = require('./routes/lenderRoutes');
 const loanRoutes = require('./routes/loanRoutes'); // Loan routes already handle `/match/:borrowerId`
@@ -45,7 +45,7 @@ app.use("/api/ai",aiRoutes);
 app.use('/api/auth', authRoutes); // Register/authentication route
 app.use('/api', testRoute);
 
-// ✅ Sample API Route to check if the server is running
+// Sample API Route to check if the server is running
 app.get('/', (req, res) => {
   res.send('API is running...');
 });
