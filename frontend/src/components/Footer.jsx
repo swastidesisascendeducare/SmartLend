@@ -13,7 +13,6 @@ const Footer = () => {
       }}
       className="text-gray-900 py-10 relative"
     >
-      {/* Background Overlay for Better Contrast */}
       <div className="absolute inset-0 bg-white opacity-20 backdrop-blur-md"></div>
 
       <div className="max-w-6xl mx-auto px-6 flex flex-wrap justify-between items-start relative">
