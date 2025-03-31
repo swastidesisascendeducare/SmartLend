@@ -12,18 +12,71 @@ import BankDetailsForm from "./forms/BankDetailsForm";
 import VerificationForm from "./forms/VerificationForm";
 
 // 🔹 Simulated existing user data (replace with actual API call)
-const existingUserData = {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    phone: "1234567890",
-    address: "123 Main St, New York, NY",
+// const existingUserData = {
+//     name: "John Doe",
+//     email: "john.doe@example.com",
+//     phone: "1234567890",
+//     address: "123 Main St, New York, NY",
+//     profilePicture: "https://via.placeholder.com/150",
+//     idProof: "https://example.com/id-proof.pdf",
+//     financialDetails: {
+//         annualIncome: "$50,000",
+//         creditScore: "750",
+//     },
+// };
+
+const borrowerData = {
+    name: "Vidhi Arora",
+    email: "aroravidhi342@gmail.com",
+    phone: "9315523457",
+    address: "93, PRIYA ENCLAVE, DELHI-110095",
     profilePicture: "https://via.placeholder.com/150",
-    idProof: "https://example.com/id-proof.pdf",
-    financialDetails: {
-        annualIncome: "$50,000",
-        creditScore: "750",
+    loanAmount: "₹1,00,000",
+    loanPurpose: "Home Renovation",
+    loanTerm: "12 months",
+    annualIncome: "₹10,00,000",
+    creditScore: "780",
+    bankDetails: {
+      accountHolder: "Vidhi Arora",
+      bankName: "ABC Bank of India",
+      accountNumber: "1234567890",
+      ifscCode: "ABC1234567",
+      branchName: "Connaught Place, Delhi",
+      accountType: "Savings",
+      upiId: "vidhi@abcbank",
     },
+    documents: [
+      { type: "ID Proof", file: "https://example.com/id-proof.pdf" },
+      { type: "Address Proof", file: "https://example.com/address-proof.pdf" },
+      { type: "Income Document", file: "https://example.com/bank-statement.pdf" },
+    ],
 };
+
+const lenderData = {
+    name: "Rishabh Dixit",
+    email: "Rishabh@gmail.com",
+    phone: "8264675692",
+    address: "Koramangala, Bangalore, India",
+    profilePicture: "https://via.placeholder.com/150",
+    availableFunds: "₹2,00,000",
+    minInterestRate: "3%",
+    maxLoanAmount: "₹3,00,000",
+    maxLoanTerm: "18 months",
+    riskAppetite: "Medium",
+    bankDetails: {
+      accountHolder: "Rishabh Dixit",
+      accountNumber: "839519847347",
+      ifscCode: "HDFC0004386",
+      bankName: "HDFC Bank",
+      branchName: "Koramangala Branch",
+      accountType: "Savings",
+      upiId: "rishabh@hdfcbank",
+    },
+    documents: [
+      { type: "ID Proof", file: "https://example.com/id-proof.pdf" },
+      { type: "Address Proof", file: "https://example.com/address-proof.pdf" },
+    ],
+  };  
 
 const ProfileForm = ({ userType }) => {
     const [step, setStep] = useState(1);
@@ -41,8 +94,8 @@ const ProfileForm = ({ userType }) => {
 
     // 🔹 Load existing user data on mount
     useEffect(() => {
-        setFormData(existingUserData); 
-    }, []);
+        setFormData(userType === "lender" ? lenderData : borrowerData);
+    }, [userType]);    
 
     const handleSave = () => {
         setShowPreview(true);
@@ -71,15 +124,13 @@ const ProfileForm = ({ userType }) => {
             case 1:
                 return <PersonalInfoForm formData={formData} setFormData={setFormData} nextStep={nextStep} />;
             case 2:
-                return <VerificationForm formData={formData} setFormData={setFormData} nextStep={nextStep} prevStep={prevStep} />;
+                return <VerificationForm formData={formData} setFormData={setFormData} userRole = {userType} nextStep={nextStep} prevStep={prevStep} />;
             case 3:
                 return userType === "borrower" 
                     ? <FinancialDetailsForm formData={formData} setFormData={setFormData} nextStep={nextStep} prevStep={prevStep} />
                     : <InvestmentPreferencesForm formData={formData} setFormData={setFormData} nextStep={nextStep} prevStep={prevStep} />;
             case 4:
-                return userType === "borrower"
-                    ? <LoanPreferencesForm formData={formData} setFormData={setFormData} nextStep={nextStep} prevStep={prevStep} />
-                    : <BankDetailsForm formData={formData} setFormData={setFormData} nextStep={nextStep} prevStep={prevStep} />;
+                return <BankDetailsForm formData={formData} setFormData={setFormData} nextStep={nextStep} prevStep={prevStep} />;
             default:
                 return null;
         }

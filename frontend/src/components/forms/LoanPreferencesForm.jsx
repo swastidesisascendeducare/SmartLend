@@ -9,34 +9,28 @@ const LoanPreferencesForm = ({ formData, setFormData}) => {
 
             <div className="space-y-6">
                 <div>
-                    <label htmlFor="loanType" className="block text-sm font-medium text-gray-700 mb-1">
-                        Preferred Loan Type
+                    <label htmlFor="maxLoanAmount" className="block text-sm font-medium text-gray-700 mb-1">
+                        Maximum Loan Amount (%)
                     </label>
-                    <select
-                        id="loanType"
-                        name="loanType"
-                        value={formData.loanType || ""}
+                    <input
+                        type="number"
+                        id="maxLoanAmount"
+                        name="maxLoanAmount"
+                        value={formData.maxLoanAmount || ""}
                         onChange={handleChange}
                         className="mt-1 block w-full border rounded p-2 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                    >
-                        <option value="">Select</option>
-                        <option value="Home">Home</option>
-                        <option value="Auto">Auto</option>
-                        <option value="Education">Education</option>
-                        <option value="Business">Business</option>
-                        <option value="Other">Other</option>
-                    </select>
+                    />
                 </div>
 
                 <div>
                     <label htmlFor="preferredInterestRate" className="block text-sm font-medium text-gray-700 mb-1">
-                        Preferred Interest Rate (%)
+                        Minimum Interest Rate (%)
                     </label>
                     <input
                         type="number"
                         id="preferredInterestRate"
                         name="preferredInterestRate"
-                        value={formData.preferredInterestRate || ""}
+                        value={formData.minInterestRate || ""}
                         onChange={handleChange}
                         className="mt-1 block w-full border rounded p-2 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                     />
@@ -50,7 +44,7 @@ const LoanPreferencesForm = ({ formData, setFormData}) => {
                         type="number"
                         id="preferredLoanTerm"
                         name="preferredLoanTerm"
-                        value={formData.preferredLoanTerm || ""}
+                        value={formData.maxLoanTerm || ""}
                         onChange={handleChange}
                         className="mt-1 block w-full border rounded p-2 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                     />

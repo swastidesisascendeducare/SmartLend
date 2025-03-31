@@ -12,9 +12,9 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
         
         {/* Logo */}
-        <RouterLink to="/">
+        <button onClick={() => window.location.reload()}>
           <img src={SmartLendLogo} alt="SmartLend" className="h-12 cursor-pointer" />
-        </RouterLink>
+        </button>
 
         {/* Desktop Navigation */}
         <ul className="hidden md:flex space-x-6 text-white font-semibold text-lg">

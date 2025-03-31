@@ -1,5 +1,4 @@
 import React from "react";
-import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import gradient from "../assets/gradient.png"; 
 
@@ -34,42 +33,18 @@ const Footer = () => {
         <div className="mb-6 md:mb-0">
           <h3 className="text-lg font-semibold text-black">Quick Links</h3>
           <ul className="mt-4 space-y-2">
-            <li><Link to="/about" className="hover:text-gray-600 transition">About</Link></li>
-            <li><Link to="/faq" className="hover:text-gray-600 transition">FAQ</Link></li>
             <li><Link to="/privacy-policy" className="hover:text-gray-600 transition">Privacy Policy</Link></li>
             <li><Link to="/terms-and-conditions" className="hover:text-gray-600 transition">Terms & Conditions</Link></li>
-            <li><Link to="/contact" className="hover:text-gray-600 transition">Contact</Link></li>
+            <li><Link to="/meet-the-team" className="hover:text-gray-600 transition">Meet the Team</Link></li>
           </ul>
         </div>
 
-        {/* Right - Social Media & Support */}
+        {/* Right - Support Email */}
         <div>
-          <h3 className="text-lg font-semibold text-black">Follow Us</h3>
-          <div className="flex gap-4 mt-4">
-            {[
-              { icon: <FaFacebookF />, link: "https://facebook.com" },
-              { icon: <FaTwitter />, link: "https://twitter.com" },
-              { icon: <FaLinkedinIn />, link: "https://linkedin.com" },
-              { icon: <FaInstagram />, link: "https://instagram.com" }
-            ].map((social, index) => (
-              <a 
-                key={index} 
-                href={social.link} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                aria-label={`Follow us on ${social.link.split(".")[1]}`} 
-                className="text-xl text-black hover:text-gray-700 transition transform hover:scale-110"
-              >
-                {social.icon}
-              </a>
-            ))}
-          </div>
-
-          {/* Support Email */}
-          <div className="mt-6">
-            <h3 className="text-lg font-semibold text-black">Support</h3>
-            <p className="text-sm text-gray-700">Email: <a href="mailto:support@smartlend.com" className="hover:underline">support@smartlend.com</a></p>
-          </div>
+          <h3 className="text-lg font-semibold text-black">Support</h3>
+          <p className="text-sm text-gray-700">
+            Email: <a href="mailto:smartlend25@gmail.com" className="hover:underline">smartlend25@gmail.com</a>
+          </p>
         </div>
       </div>
 

@@ -4,25 +4,30 @@ import { motion } from "framer-motion";
 
 // Sample Lender Data
 const lenderData = {
-  name: "Alice Johnson",
-  email: "alice.johnson@example.com",
-  phone: "9876543210",
-  address: "456 Market St, San Francisco, CA 94103",
+  name: "Rishabh Dixit",
+  email: "Rishabh@gmail.com",
+  phone: "8264675692",
+  address: "Koramangala, Bangalore, India",
   profilePicture: "https://via.placeholder.com/150",
   availableFunds: "₹2,00,000",
   minInterestRate: "3%",
-  maxLoanAmount: "₹300,000",
+  maxLoanAmount: "₹3,00,000",
   maxLoanTerm: "18 months",
-  riskAppetite: "Moderate",
+  riskAppetite: "Medium",
   bankDetails: {
-    accountNumber: "9876543210",
-    ifscCode: "XYZ9876543",
+    accountNumber: "839519847347",
+    ifscCode: "HDFC0004386",
+    bankName: "HDFC Bank",
+    branchName: "Koramangala Branch",
+    accountType: "Savings",
+    upiId: "rishabh@hdfcbank",
   },
   documents: [
     { type: "ID Proof", file: "https://example.com/id-proof.pdf" },
     { type: "Address Proof", file: "https://example.com/address-proof.pdf" },
+    { type: "Bank Statement", file: "https://example.com/bank-statement.pdf" },
   ],
-};
+};  
 
 const ProfileItem = ({ label, value }) => (
   <p className="mb-4 text-gray-700">
@@ -35,14 +40,14 @@ const LenderDisplayProfile = () => {
   const [activeModal, setActiveModal] = useState(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 to-purple-800 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-[#435FEF] to-[#2E4ABF] text-white">
       <div className="max-w-7xl mx-auto bg-white rounded-lg shadow-lg p-8 relative text-gray-800">
         {/* 🔹 Greeting Section */}
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-4xl font-bold">Hello Rishabh</h1>
             <p className="text-gray-600 mt-2">
-                Take control of your profile and stay on top of your financial investments with ease.
+              Take control of your profile and stay on top of your financial investments with ease.
             </p>
             <Link
               to="/lender-profile/edit"
@@ -109,27 +114,26 @@ const StatCard = ({ label, value }) => (
 // ✅ Section Components (Now Clickable)
 const PersonalDetails = ({ lenderData, onClick }) => (
   <Card title="Personal Information" onClick={onClick}>
-    <ProfileItem label="Name" value="Rishabh Dixit" />
-    <ProfileItem label="Email" value="Rishabh@gmail.com" />
-    <ProfileItem label="Phone" value="8264675692" />
-    <ProfileItem label="Address" value="Koramangala, Bangalore, India" />
+    <ProfileItem label="Name" value={lenderData.name} />
+    <ProfileItem label="Email" value={lenderData.email} />
+    <ProfileItem label="Phone" value={lenderData.phone} />
+    <ProfileItem label="Address" value={lenderData.address} />
   </Card>
 );
 
 const InvestmentDetails = ({ lenderData, onClick }) => (
   <Card title="Investment Preferences" onClick={onClick}>
-    <ProfileItem label="Available Funds" value="200000" />
-    <ProfileItem label="Minimum Interest Rate" value="3" />
-    <ProfileItem label="Maximum Loan Amount" value="300000" />
-    <ProfileItem label="Maximum Loan Term" value="18" />
-    <ProfileItem label="Risk Appetite" value="Medium" />
+    <ProfileItem label="Available Funds" value={lenderData.availableFunds} />
+    <ProfileItem label="Minimum Interest Rate" value={lenderData.minInterestRate} />
+    <ProfileItem label="Maximum Loan Amount" value={lenderData.maxLoanAmount} />
+    <ProfileItem label="Maximum Loan Term" value={lenderData.maxLoanTerm} />
   </Card>
 );
 
 const BankDetails = ({ lenderData, onClick }) => (
   <Card title="Bank Details" onClick={onClick}>
-    <ProfileItem label="Account Number" value="839519847347" />
-    <ProfileItem label="IFSC Code" value="HDFC0004386" />
+    <ProfileItem label="Account Number" value={lenderData.bankDetails.accountNumber} />
+    <ProfileItem label="IFSC Code" value={lenderData.bankDetails.ifscCode} />
   </Card>
 );
 
@@ -137,7 +141,7 @@ const Documents = ({ lenderData, onClick }) => (
   <Card title="Documents" onClick={onClick}>
     {lenderData.documents.map((doc, index) => (
       <p key={index} className="mb-2">
-        <span>{doc.type}: </span>
+        {doc.type}:{" "}
         <a href={doc.file} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
           View Document
         </a>
@@ -174,7 +178,6 @@ const sections = [
   { id: "investment", title: "Investment Preferences", content: <InvestmentDetails lenderData={lenderData} /> },
   { id: "bank", title: "Bank Details", content: <BankDetails lenderData={lenderData} /> },
   { id: "documents", title: "Documents", content: <Documents lenderData={lenderData} /> },
-  { id: "security", title: "Security", content: <Security /> },
 ];
 
 // ✅ Correct Export
