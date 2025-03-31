@@ -1,7 +1,7 @@
 
 # SmartLend: Empowering Wealth, One Loan at a Time
 
-![SmartLend Logo](frontend/src/assets/SmartLendLogo5.png)
+![SmartLend Logo](frontend/src/assets/SmartLendLogo7.png)
 
 Welcome to **SmartLend**, a cutting-edge peer-to-peer lending platform designed to connect borrowers and lenders seamlessly. Whether you're seeking a loan to fuel your dreams or looking to invest in opportunities, SmartLend leverages modern technology—machine learning, and a robust full-stack architecture—to make lending smarter, faster, and more secure.
 
