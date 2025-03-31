@@ -22,20 +22,20 @@ const SignupForm = ({ userType }) => {
     e.preventDefault();
 
     try {
-      console.log("🚀 Attempting Firebase Signup...");
-      // ✅ Create user in Firebase Auth
+      console.log("Attempting Firebase Signup...");
+      // Create user in Firebase Auth
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
 
-      console.log("✅ User Registered:", userCredential.user);
+      console.log("User Registered:", userCredential.user);
 
-      // ✅ Get Firebase token
+      // Get Firebase token
       const token = await userCredential.user.getIdToken();
 
-      // ✅ Send data to backend
+      // Send data to backend
       const payload = {
         fullName: formData.fullName,
         email: formData.email,
@@ -47,7 +47,7 @@ const SignupForm = ({ userType }) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}` // ✅ Pass token to backend
+          'Authorization': `Bearer ${token}` // Pass token to backend
         },
         body: JSON.stringify(payload)
       });
@@ -55,21 +55,21 @@ const SignupForm = ({ userType }) => {
       const data = await response.json();
 
       if (response.ok) {
-        console.log('✅ Signup successful:', data);
+        console.log('Signup successful:', data);
         alert('Signup successful');
         
-        // ✅ Navigate based on userType
+        // Navigate based on userType
         if (userType === 'lender') {
           navigate('/profile/lender');
         } else {
           navigate('/profile/borrower');
         }
       } else {
-        console.error('❌ Signup failed:', data.error);
+        console.error('Signup failed:', data.error);
         alert(data.error || 'Signup failed');
       }
     } catch (error) {
-      console.error('❌ Signup Error:', error.message);
+      console.error('Signup Error:', error.message);
       alert(`Signup Error: ${error.message}`);
     }
   };
