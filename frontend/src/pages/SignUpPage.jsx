@@ -3,8 +3,8 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import { ArrowLeft as Home } from "lucide-react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore"; 
-import { auth, db } from "../firebaseConfig"; // ✅ Correct import
-import axios from "axios"; // ✅ Added axios for backend integration
+import { auth, db } from "../firebaseConfig"; 
+import axios from "axios"; // Added axios for backend integration
 import logo from "../assets/SmartLendLogo6.png";
 import gradient from "../assets/gradient.png";
 
@@ -28,12 +28,12 @@ const SignUpPage = () => {
     setIsLender(initialType);
   }, [initialType]);
 
-  // ✅ Handle Input Change
+  // Handle Input Change
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // ✅ Handle Form Submission
+  // Handle Form Submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("🔥 Form Submitted!", formData);
@@ -56,17 +56,17 @@ const SignUpPage = () => {
         fullName: formData.fullName,
         email: formData.email,
         phoneNumber: formData.phoneNumber,
-        isLender: isLender, // ✅ Save role
+        isLender: isLender, 
         lenderType: isLender ? formData.lenderType : null,
         loanAmount: !isLender ? formData.loanAmount : null, 
         createdAt: new Date(),
       });
 
-      console.log("✅ User Data Saved to Firestore");
+      console.log("User Data Saved to Firestore");
 
-      // ✅ Send user data to backend (for MongoDB storage)
+      // Send user data to backend (for MongoDB storage)
       
-      const token = await user.getIdToken(); // ✅ Get Firebase Auth token
+      const token = await user.getIdToken(); // Get Firebase Auth token
 
 await axios.post("http://localhost:5001/api/auth/signup", {
   uid: user.uid,
@@ -78,17 +78,17 @@ await axios.post("http://localhost:5001/api/auth/signup", {
   loanAmount: !isLender ? formData.loanAmount : null
 }, {
   headers: {
-    Authorization: `Bearer ${token}` // ✅ Pass token in Authorization header
+    Authorization: `Bearer ${token}` // Pass token in Authorization header
   }
 });
 
 
 
 
-      console.log("✅ User Data Sent to Backend");
+      console.log("User Data Sent to Backend");
       alert("Signup Successful!");
 
-      // ✅ Navigate to Dashboard
+      // Navigate to Dashboard
       navigate(isLender ? "/lender-dashboard" : "/loan-application");
 
     } catch (error) {
@@ -100,7 +100,7 @@ await axios.post("http://localhost:5001/api/auth/signup", {
   return (
     <div className="relative w-full h-screen flex items-center justify-center px-6" style={{ backgroundImage: `url(${gradient})`, backgroundSize: "cover" }}>
       <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md relative">
-        {/* ✅ Back Button */}
+        {/*  Back Button */}
         <button 
           onClick={() => navigate("/")} 
           className="absolute top-4 left-4 text-gray-600 hover:text-primary transition"
@@ -108,12 +108,12 @@ await axios.post("http://localhost:5001/api/auth/signup", {
           <Home size={28} />
         </button>
 
-        {/* ✅ Logo */}
+        {/* Logo */}
         <div className="flex justify-center mb-4">
             <img src={logo} alt="SmartLend Logo" className="h-14" />
         </div>
 
-        {/* ✅ User Type Toggle */}
+        {/* User Type Toggle */}
         <div className="flex justify-between my-6 bg-gray-200 p-1 rounded-lg">
           <button
             onClick={() => setIsLender(false)}
@@ -133,7 +133,7 @@ await axios.post("http://localhost:5001/api/auth/signup", {
           </button>
         </div>
 
-        {/* ✅ Form */}
+        {/* Form */}
         <form className="space-y-4 text-textDark" onSubmit={handleSubmit}>
           <input 
             type="text" 
@@ -172,7 +172,7 @@ await axios.post("http://localhost:5001/api/auth/signup", {
             required
           />
           
-          {/* ✅ Terms Checkbox */}
+          {/* Terms Checkbox */}
           <div className="flex items-center space-x-2">
             <input
               type="checkbox"
@@ -188,12 +188,12 @@ await axios.post("http://localhost:5001/api/auth/signup", {
             </label>
           </div>
           
-          {/* ✅ Submit Button */}
+          {/* Submit Button */}
           <button type="submit" className="w-full bg-primary text-white py-3 rounded-lg hover:bg-hoverEffect transition text-lg font-semibold">
             Sign Up as {isLender ? "Lender" : "Borrower"}
           </button>
 
-          {/* ✅ Redirect to Login */}
+          {/* Redirect to Login */}
           <div className="mt-4 text-center text-gray-600">
             <p className="text-sm mt-2">
               Already have an account?{" "}
