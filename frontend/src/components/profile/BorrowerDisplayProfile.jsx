@@ -9,10 +9,10 @@ const borrowerData = {
   phone: "9315523457",
   address: "93, PRIYA ENCLAVE, DELHI-110095",
   profilePicture: "https://via.placeholder.com/150",
-  loanAmount: "₹1,00,000",
+  loanAmount: "1,00,000",
   loanPurpose: "Home Renovation",
   loanTerm: "12 months",
-  annualIncome: "₹10,00,000",
+  annualIncome: "10,00,000",
   creditScore: "780",
   bankDetails: {
     accountNumber: "1234567890",

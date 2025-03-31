@@ -80,9 +80,9 @@ import { CheckCircle, Clock, XCircle, CreditCard } from "lucide-react";
 
 const RepaymentTracking = () => {
   const [repayments, setRepayments] = useState([
-    { id: 1, dueDate: "2025-03-10", amount: 500, status: "Upcoming" },
-    { id: 2, dueDate: "2025-02-10", amount: 500, status: "Paid" },
-    { id: 3, dueDate: "2025-01-10", amount: 500, status: "Paid" },
+    { id: 1, dueDate: "2025-03-10", amount: 200000, status: "Prospective" },
+    { id: 2, dueDate: "2025-02-10", amount: 10000, status: "Prospective" },
+    { id: 3, dueDate: "2025-01-10", amount: 5000, status: "Upcoming" },
   ]);
 
   useEffect(() => {

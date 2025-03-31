@@ -1,8 +1,17 @@
-const express = require('express');
+// const express = require('express');
+// const router = express.Router();
+
+// const { getAgreement } = require('../controllers/aiController')
+
+// router.post('/agreement',getAgreement);
+
+// module.exports = router;
+
+const express = require("express");
 const router = express.Router();
 
-const { getAgreement } = require('../controllers/aiController')
+const { getAgreement } = require("../controllers/aiController");
 
-router.post('/agreement',getAgreement);
+router.post("/agreement", getAgreement);
 
 module.exports = router;

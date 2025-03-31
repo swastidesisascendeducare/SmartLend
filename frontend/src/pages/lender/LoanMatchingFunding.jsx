@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from "react";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 // const loanRequests = [
 //   { id: 1, name: "Amit Sharma", amount: 50000, interest: 12, duration: "12 months", risk: "Low", funded: 30 },
 //   { id: 2, name: "Priya Mehta", amount: 200000, interest: 15, duration: "24 months", risk: "High", funded: 60 },
@@ -9,9 +9,8 @@ import axios from "axios";
 // ];
 
 
-
-
 const LoanMatchingFunding = () => {
+  const navigate = useNavigate();
   const [loanRequests, setLoanRequests] = useState([]);
   const [filter, setFilter] = useState("All");
 
@@ -72,9 +71,12 @@ const LoanMatchingFunding = () => {
       <p className="text-sm mt-1">{loan.funded}% funded</p>
 
       {/* Fund Button */}
-      <button className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-        Fund Loan
+      <button
+        className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        onClick={() => navigate("/loan-agreement-review")}>
+          Fund Loan
       </button>
+
     </div>
   ))}
       </div>

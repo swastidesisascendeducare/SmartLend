@@ -192,7 +192,7 @@ const BorrowerDashboard = () => {
                 ))}
               </tbody>
             </table>
-                <RepaymentTracking/>
+                {/* <RepaymentTracking/> */}
           </div>
         )}
       </motion.div>
